@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f1ede2;
+  --color-offwhite: #fafbfb;
+  --color-ink: #252830;
+  --color-lime: #ccff00;
+  --color-orange: #ff5c00;
+  --color-magenta: #ff00c7;
+  --color-lavender: #e2a9f1;
+  --font-sans: "Blender", "Heebo", "Assistant", "Inter", system-ui, sans-serif;
+  --font-mono: "Space Mono", "Roboto Mono", ui-monospace, monospace;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+
+html { scroll-behavior: smooth; background: #f1ede2; }
+body { margin: 0; background: #f1ede2; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
