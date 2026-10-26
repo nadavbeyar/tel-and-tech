@@ -91,7 +91,8 @@
       <li><a class="hover:text-orange" href="#syllabus"><bdi dir="ltr">[01]</bdi> סילבוס</a></li>
       <li><a class="hover:text-orange" href="#mentors"><bdi dir="ltr">[02]</bdi> מנטורים</a></li>
       <li><a class="hover:text-orange" href="#eligibility"><bdi dir="ltr">[03]</bdi> למי זה מתאים</a></li>
-      <li><a class="hover:text-orange" href="#apply"><bdi dir="ltr">[04]</bdi> הגשת מועמדות</a></li>
+      <li><a class="hover:text-orange" href="#faq"><bdi dir="ltr">[04]</bdi> שאלות נפוצות</a></li>
+      <li><a class="hover:text-orange" href="#apply"><bdi dir="ltr">[05]</bdi> הגשת מועמדות</a></li>
     </ul>
   </nav>
 </header>
@@ -124,19 +125,25 @@
     <!-- Right col, part B: metadata, copy, CTAs (mobile: 3rd) -->
     <div class="lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:self-start lg:mt-8">
       <!-- Metadata strip -->
-      <dl class="grid grid-cols-1 sm:grid-cols-3 border-4 border-ink bg-paper font-mono text-sm">
-        <div class="p-3 sm:p-4 border-b-4 sm:border-b-0 sm:border-e-4 border-ink">
+      <dl class="grid grid-cols-1 sm:grid-cols-2 border-t-4 border-s-4 border-ink bg-paper font-mono text-sm">
+        <div class="p-3 sm:p-4 border-b-4 border-e-4 border-ink">
           <dt class="text-[11px] font-bold text-ink/60">FORMAT</dt>
-          <dd class="font-sans font-bold mt-1"><bdi dir="ltr">7</bdi> מפגשים + מנטורינג <bdi dir="ltr">1:1</bdi></dd>
+          <dd class="font-sans font-bold mt-1"><bdi dir="ltr">7</bdi> מפגשים לאורך 3 חודשים + מנטורינג אישי <bdi dir="ltr">1:1</bdi></dd>
+          <dd class="font-sans text-xs mt-1 text-ink/70">החל מדצמבר 2026</dd>
         </div>
-        <div class="p-3 sm:p-4 border-b-4 sm:border-b-0 sm:border-e-4 border-ink">
+        <div class="p-3 sm:p-4 border-b-4 border-e-4 border-ink">
           <dt class="text-[11px] font-bold text-ink/60">LOCATION</dt>
-          <dd class="font-sans font-bold mt-1">הרציף, הגליל 6, נווה שאנן</dd>
+          <dd class="font-sans font-bold mt-1">הרציף (נווה שאנן) &amp; <bdi dir="ltr">CityZone</bdi> (פארק עתידים)</dd>
         </div>
-        <div class="p-3 sm:p-4 bg-lime">
+        <div class="p-3 sm:p-4 border-b-4 border-e-4 border-ink">
+          <dt class="text-[11px] font-bold text-ink/60">COST</dt>
+          <dd class="font-sans font-black text-xl mt-1">490 ₪ למיזם</dd>
+          <dd class="font-sans text-xs mt-1 text-ink/70">(ליחיד או צמד שותפים) // מסובסד ע״י עיריית ת״א-יפו // תשלום רק לאחר קבלה</dd>
+        </div>
+        <div class="p-3 sm:p-4 border-b-4 border-e-4 border-ink bg-lime">
           <dt class="text-[11px] font-bold">DEADLINE</dt>
           <dd class="mt-1">
-            <time datetime="2026-11-10" dir="ltr" class="font-bold text-base">10.11.2026</time>
+            <time datetime="2026-11-10" dir="ltr" class="font-bold text-xl">10.11.2026</time>
             <span id="countdown" class="block text-[11px] mt-0.5" aria-live="polite"></span>
           </dd>
         </div>
@@ -345,20 +352,118 @@
     <div class="lg:col-span-4">
       <p class="font-mono text-sm font-bold text-orange mb-2"><bdi dir="ltr">[ 03 ] // ELIGIBILITY</bdi></p>
       <h2 id="elig-title" class="font-black text-4xl sm:text-5xl tracking-tight">למי הסטודיו מתאים?</h2>
-      <p class="font-medium text-lg mt-2 text-ink/80">שלושה תנאי קבלה, בלי אותיות קטנות:</p>
+      <p class="font-medium text-lg mt-2 text-ink/80">ארבעה תנאי קבלה, בלי אותיות קטנות:</p>
     </div>
     <ul class="lg:col-span-8 border-4 border-ink divide-y-4 divide-ink">
       <li class="flex items-stretch">
         <span class="font-mono font-bold text-2xl bg-orange border-e-4 border-ink px-5 flex items-center" dir="ltr" aria-hidden="true">A</span>
-        <p class="p-5 sm:p-6 text-lg sm:text-xl font-bold">ניסיון מוכח בעולם ההייטק <span class="font-medium">(פיתוח, מוצר, דאטה, אופרציה וכו')</span>.</p>
+        <div class="p-5 sm:p-6">
+          <h3 class="text-lg sm:text-xl font-black">ניסיון מוכח בהייטק</h3>
+          <p class="mt-1 font-medium leading-relaxed">לפחות 5 שנות ניסיון בתפקידי פיתוח, מוצר, דאטה, אופרציה או תפקידים עסקיים בחברות טכנולוגיה.</p>
+        </div>
       </li>
       <li class="flex items-stretch">
         <span class="font-mono font-bold text-2xl bg-lime border-e-4 border-ink px-5 flex items-center" dir="ltr" aria-hidden="true">B</span>
-        <p class="p-5 sm:p-6 text-lg sm:text-xl font-bold">תקופת מעבר תעסוקתית או ללא תעסוקה נוכחית.</p>
+        <div class="p-5 sm:p-6">
+          <h3 class="text-lg sm:text-xl font-black">תקופת מעבר תעסוקתית</h3>
+          <p class="mt-1 font-medium leading-relaxed">מיועד למי שנמצאים כרגע בין עבודות, בחל״ת, בהודעה מוקדמת או בחיפוש האתגר הבא.</p>
+        </div>
       </li>
       <li class="flex items-stretch">
         <span class="font-mono font-bold text-2xl bg-lavender border-e-4 border-ink px-5 flex items-center" dir="ltr" aria-hidden="true">C</span>
-        <p class="p-5 sm:p-6 text-lg sm:text-xl font-bold">הגעה עם רעיון וזיהוי צורך אמיתי בשוק <span class="font-medium">(אין צורך במוצר קיים)</span>.</p>
+        <div class="p-5 sm:p-6">
+          <h3 class="text-lg sm:text-xl font-black">תושבות תל אביב-יפו</h3>
+          <p class="mt-1 font-medium leading-relaxed">התכנית פתוחה לתושבות ותושבי תל אביב-יפו.</p>
+        </div>
+      </li>
+      <li class="flex items-stretch">
+        <span class="font-mono font-bold text-2xl bg-cream border-e-4 border-ink px-5 flex items-center" dir="ltr" aria-hidden="true">D</span>
+        <div class="p-5 sm:p-6">
+          <h3 class="text-lg sm:text-xl font-black">רעיון ראשוני או כאב שוק</h3>
+          <p class="mt-1 font-medium leading-relaxed">הגעה עם רעיון, צורך או בעיה אמיתית מהתעשייה שברצונכם להפוך לסטארטאפ.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" aria-labelledby="faq-title" class="border-b-4 border-ink grid-bg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="font-mono text-sm font-bold text-orange mb-2"><bdi dir="ltr">[ 04 ] // FAQ</bdi></p>
+      <h2 id="faq-title" class="font-black text-4xl sm:text-5xl tracking-tight">שאלות נפוצות</h2>
+    </div>
+    <ul class="lg:col-span-8 bg-paper border-t-4 border-x-4 border-ink shadow-brut">
+      <li class="border-b-4 border-ink">
+        <details class="group">
+          <summary class="cursor-pointer p-5 sm:p-6 flex items-center justify-between gap-4 hover:bg-cream group-open:bg-cream">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono font-bold text-orange" dir="ltr">Q01</span>
+              <span class="font-black text-lg sm:text-xl">כמה עולה להשתתף בתכנית?</span>
+            </span>
+            <span class="plus font-mono text-2xl font-bold shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 sm:px-6 pb-6 bg-cream">
+            <p class="font-medium leading-relaxed max-w-3xl ps-0 sm:ps-12">התכנית מסובסדת במלואה על ידי עיריית תל אביב-יפו, תל אביב טק ומרכז הרציף. דמי ההשתתפות עומדים על 490 ₪ בלבד למיזם כולו (תשלום חד-פעמי - בין אם אתם יזם יחיד ובין אם מגיעים כצמד שותפים לאותו פרויקט). הגבייה מתבצעת אך ורק לאחר הודעת קבלה רשמית לתכנית. הגשת המועמדות עצמה הינה ללא עלות.</p>
+          </div>
+        </details>
+      </li>
+      <li class="border-b-4 border-ink">
+        <details class="group">
+          <summary class="cursor-pointer p-5 sm:p-6 flex items-center justify-between gap-4 hover:bg-cream group-open:bg-cream">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono font-bold text-orange" dir="ltr">Q02</span>
+              <span class="font-black text-lg sm:text-xl">האם חובה להגיע עם צוות או מוצר מוכן (<bdi dir="ltr">MVP</bdi>)?</span>
+            </span>
+            <span class="plus font-mono text-2xl font-bold shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 sm:px-6 pb-6 bg-cream">
+            <p class="font-medium leading-relaxed max-w-3xl ps-0 sm:ps-12">ממש לא. התכנית מיועדת ליזמות ויזמים עצמאיים או צוותים בראשית דרכם. מתחילים מפיצוח הרעיון וכאב השוק, ומגיעים עד לבניית מוצר ראשוני והצגה ב־<bdi dir="ltr">Demo Day</bdi>.</p>
+          </div>
+        </details>
+      </li>
+      <li class="border-b-4 border-ink">
+        <details class="group">
+          <summary class="cursor-pointer p-5 sm:p-6 flex items-center justify-between gap-4 hover:bg-cream group-open:bg-cream">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono font-bold text-orange" dir="ltr">Q03</span>
+              <span class="font-black text-lg sm:text-xl">מתי והיכן יתקיימו המפגשים?</span>
+            </span>
+            <span class="plus font-mono text-2xl font-bold shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 sm:px-6 pb-6 bg-cream">
+            <p class="font-medium leading-relaxed max-w-3xl ps-0 sm:ps-12">התכנית תיפתח במהלך דצמבר 2026 ותימשך כ־3 חודשים. המפגשים יתקיימו במרכז הרציף (רחוב הגליל 6, נווה שאנן) ובמתחם <bdi dir="ltr">CityZone</bdi> (פארק עתידים).</p>
+          </div>
+        </details>
+      </li>
+      <li class="border-b-4 border-ink">
+        <details class="group">
+          <summary class="cursor-pointer p-5 sm:p-6 flex items-center justify-between gap-4 hover:bg-cream group-open:bg-cream">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono font-bold text-orange" dir="ltr">Q04</span>
+              <span class="font-black text-lg sm:text-xl">איך מתבצע תהליך הקבלה והמיון?</span>
+            </span>
+            <span class="plus font-mono text-2xl font-bold shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 sm:px-6 pb-6 bg-cream">
+            <p class="font-medium leading-relaxed max-w-3xl ps-0 sm:ps-12">לאחר הגשת טופס המועמדות המקוון, צוות התכנית יבחן את העמידה בתנאי הסף, הרקע המקצועי ומוטיבציית המועמדים. מועמדים מתאימים יוזמנו לראיון היכרות אישי וקצר.</p>
+          </div>
+        </details>
+      </li>
+      <li class="border-b-4 border-ink">
+        <details class="group">
+          <summary class="cursor-pointer p-5 sm:p-6 flex items-center justify-between gap-4 hover:bg-cream group-open:bg-cream">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono font-bold text-orange" dir="ltr">Q05</span>
+              <span class="font-black text-lg sm:text-xl">מהי מידת המחויבות הנדרשת?</span>
+            </span>
+            <span class="plus font-mono text-2xl font-bold shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 sm:px-6 pb-6 bg-cream">
+            <p class="font-medium leading-relaxed max-w-3xl ps-0 sm:ps-12">התכנית היא סטודיו מעשי (<bdi dir="ltr">Hands-on</bdi>). נדרשת נוכחות מלאה בכל 7 המפגשים, עבודה עצמאית על המיזם בין המפגשים, והשתתפות בסבבי המנטורינג האישיים.</p>
+          </div>
+        </details>
       </li>
     </ul>
   </div>
@@ -367,7 +472,7 @@
 <!-- ============ FINAL CTA ============ -->
 <section id="apply" aria-labelledby="cta-title" class="on-orange bg-orange border-b-4 border-ink">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-    <p class="font-mono text-sm font-bold mb-4"><bdi dir="ltr">[ 04 ] // APPLY</bdi> · דדליין <time datetime="2026-11-10" dir="ltr">10.11.2026</time></p>
+    <p class="font-mono text-sm font-bold mb-4"><bdi dir="ltr">[ 05 ] // APPLY</bdi> · דדליין <time datetime="2026-11-10" dir="ltr">10.11.2026</time></p>
     <h2 id="cta-title" class="font-black leading-[1.15] tracking-tight text-5xl sm:text-7xl lg:text-8xl xl:text-9xl">
       יש לך רעיון לסטארטאפ?
       <span class="inline-block mt-3 bg-ink text-cream px-3 py-1">מקומך איתנו.</span>
