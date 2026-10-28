@@ -63,27 +63,34 @@
   .meta .dot{display:inline-block;width:10px;height:10px;background:var(--acid);margin-left:8px;vertical-align:middle}
 
   /* logos */
-  /* three program partners, equal cells */
+  /* partner lineup: [ TLV-Yafo / Tel Aviv Tech ] [ הרציף ] [ CityZone compact ] */
   .logos{display:flex;align-items:stretch;padding:20px 44px 0}
   .logo-cell{
-    width:240px;height:88px;padding:12px 20px;border:2px solid var(--ink);background:#fff;
-    display:flex;align-items:center;justify-content:center;margin-left:-2px;
+    height:88px;padding:12px 22px;border:2px solid var(--ink);background:#fff;
+    display:flex;align-items:center;justify-content:center;gap:18px;margin-left:-2px;
   }
-  .logo-cell img{height:58px;width:auto;max-width:100%;display:block}
+  .logo-cell img{height:58px;width:auto;display:block}
+  .logo-cell .div{width:2px;height:52px;background:var(--ink)}
+  .logo-cell.main{min-width:340px}
+  .logo-cell.platform{min-width:220px}
+  .logo-cell.partner{width:170px;padding:12px 16px}
+  .logo-cell.partner img{height:auto;max-height:34px;max-width:130px}
   .logo-badge{
-    font-family:'Inter',sans-serif;font-weight:800;font-size:26px;direction:ltr;white-space:nowrap;
+    font-family:'Inter',sans-serif;font-weight:800;font-size:22px;direction:ltr;white-space:nowrap;
   }
-  .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:26px;direction:rtl}
+  .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:24px;direction:rtl}
+  .logo-cell.partner .logo-badge{font-size:17px}
 
   /* hero */
   .hero{padding:22px 44px 0;position:relative}
+  .mark-img{height:96px;width:auto;object-fit:contain;display:block}
   .cat-badge{
     display:inline-block;background:var(--acid);border:2px solid var(--ink);
     padding:6px 14px;font-family:var(--mono);font-weight:700;font-size:20px;
     box-shadow:4px 4px 0 var(--ink);
   }
   .headline{
-    font-family:var(--sans);font-weight:800;font-size:70px;line-height:1.15;
+    font-family:var(--sans);font-weight:800;font-size:62px;line-height:1.15;
     margin-top:22px;max-width:980px;
   }
   .headline .l1{display:block}
@@ -91,25 +98,18 @@
     display:inline-block;margin-top:24px;
     background:var(--ink);color:var(--paper);padding:4px 18px 10px;line-height:1.1;
   }
-  .mark-row{display:flex;align-items:center;gap:18px;margin-top:24px}
-  .mark{
-    background:var(--orange);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);
-    padding:10px 22px 14px;font-family:var(--sans);font-weight:800;font-size:54px;line-height:1;
-    color:#000;white-space:nowrap;
-  }
-  .mark .tech{font-family:'Inter',sans-serif;font-weight:800}
-  .mark .sl{font-family:var(--mono);font-weight:700;font-size:44px}
+  .mark-row{display:flex;align-items:center;gap:22px;margin-top:16px}
   .mark-note{font-family:var(--mono);font-size:14px;line-height:1.5;border-right:4px solid var(--orange);padding-right:12px}
 
   /* speakers */
-  .speakers{padding:26px 44px 0;flex:1}
+  .speakers{padding:18px 44px 0;flex:1}
   .sec-head{
     display:flex;justify-content:space-between;align-items:flex-end;
-    border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px;
+    border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:12px;
   }
   .sec-head h2{font-size:30px;font-weight:800}
   .sec-head .count{font-family:var(--mono);font-size:14px;background:var(--ink);color:var(--acid);padding:4px 10px;direction:ltr}
-  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:16px 14px}
+  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px 14px}
   .card{background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);position:relative}
   .card .ph{width:100%;height:161px;border-bottom:2px solid var(--ink);overflow:hidden;background:#d9d6cf;position:relative}
   .card .ph img{width:100%;height:100%;display:block}
@@ -127,7 +127,7 @@
   .card .role{font-family:var(--mono);font-size:10.5px;line-height:1.3;margin-top:4px;color:#333}
 
   /* footer */
-  .footer{border-top:2px solid var(--ink);margin-top:24px}
+  .footer{border-top:2px solid var(--ink);margin-top:14px}
   .dates{display:grid;grid-template-columns:1fr 1fr 1.25fr;background:var(--ink);color:#fff}
   .date-cell{padding:16px 24px;border-left:2px solid #333}
   .date-cell:last-child{border-left:none}
@@ -170,14 +170,16 @@
 
         <!-- LOGOS: organizers prominent, host partner small -->
         <div class="logos">
-          <div class="logo-cell" data-fallback="עיריית תל אביב-יפו" data-he="1">
-            <img src="/public/assets/logos/tlv-municipality.png" alt="עיריית תל אביב-יפו">
+          <div class="logo-cell main">
+            <img data-asset="logos/tlv-municipality.png" alt="עיריית תל אביב-יפו" data-fallback="עיריית תל אביב-יפו" data-he="1">
+            <span class="div"></span>
+            <img data-asset="logos/tel-aviv-tech.png" alt="Tel Aviv Tech" data-fallback="Tel Aviv Tech">
           </div>
-          <div class="logo-cell" data-fallback="הרציף" data-he="1">
-            <img src="/public/assets/logos/the-platform.png" alt="הרציף">
+          <div class="logo-cell platform">
+            <img data-asset="logos/the-platform.png" alt="הרציף" data-fallback="הרציף" data-he="1">
           </div>
-          <div class="logo-cell" data-fallback="CityZone">
-            <img src="/public/assets/logos/cityzone.png" alt="CityZone">
+          <div class="logo-cell partner">
+            <img data-asset="logos/cityzone.png" alt="CityZone" data-fallback="CityZone">
           </div>
         </div>
 
@@ -186,7 +188,7 @@
           <span class="cat-badge">[ מסלול 01 // סטודיו יזמי מעשי ]</span>
           <h1 class="headline"><span class="l1">מניסיון עשיר בהייטק —</span><span class="hl">להקמת חברת סטארטאפ</span></h1>
           <div class="mark-row">
-            <div class="mark">תל <span class="tech">&amp; tech</span> <span class="sl">//</span> יזמות</div>
+            <img class="mark-img" id="masterLogo" data-asset="logos/tel-and-tech-entrepreneurship.png" alt="תל & tech // יזמות">
             <div class="mark-note">7 מפגשים מעשיים<br>מנטורים מהשטח<br>מרעיון למיזם</div>
           </div>
         </div>
@@ -227,30 +229,70 @@
 </div>
 
 <script>
+/* ---------- ASSET RESOLUTION ----------
+   Every asset is tried against these bases in order, so the page works whether it is
+   opened from the project root, served by a static server, or by Vite (public/ served at /). */
+const ASSET_BASES = ["public/assets/", "/assets/", "/public/assets/", "assets/"];
+const candidatesFor = rel => ASSET_BASES.map(b => b + rel);
+
+function probe(url){
+  return new Promise(res=>{ const im=new Image(); im.onload=()=>res(url); im.onerror=()=>res(null); im.src=url; });
+}
+async function firstWorking(urls){
+  for (const u of urls){ const ok = await probe(u); if (ok) return ok; }
+  return null;
+}
+
 /* ---------- DATA ---------- */
+/* Nadav's photo: if you paste the data:image/jpeg;base64,... string from studio.html here it is used as-is.
+   If left empty, the page reads it straight out of studio.html at load time (needs a server, not file://). */
+const NADAV_SRC = "";
+
 const SPEAKERS = [
-  {name:"Gilad Hazan",        role:"Founder & CEO, GHgroup",                 img:"/public/assets/speakers/gilad-hazan.jpg.jpg"},
-  {name:"Assaf Tzur-El",      role:"Startup Tech Advisor & Fractional CTO", img:"/public/assets/speakers/assaf-tzur-el.jpg.jpg"},
-  {name:"Hadas Farhi",        role:"Senior Frontend & Design Systems",      img:"/public/assets/speakers/hadas-farhi.jpg.jpg"},
-  {name:"Aviad Ben-laish",    role:"Principal, StageOne Ventures",          img:"/public/assets/speakers/aviad-ben-laish.jpg.jpg"},
-  {name:"Lior Frimet",        role:"קשרי אקדמיה ותעשייה",                   img:"/public/assets/speakers/lior-frimet.jpg.jpg"},
-  {name:"Ron Peled",          role:"Co-founder, Sola Security",             img:"/public/assets/speakers/ron-peled.jpg.jpg"},
-  {name:"Tomer Kashi",        role:"Co-Founder & CEO, SkyWatch",            img:"/public/assets/speakers/tomer-kashi.jpg.jpg"},
-  {name:"Omer Kalderon",      role:"General Partner, Day Zero VC",          img:"/public/assets/speakers/omer-kalderon.jpg.jpg"},
-  {name:"Ela Perez",          role:"Venture Capital, Wix Ventures",         img:"/public/assets/speakers/ela-perez.jpg.jpg"},
-  {name:"Koren Grinshpoon",   role:"Co-founder & COO, Echo3D",              img:"/public/assets/speakers/koren-grinshpoon.jpg.jpg"},
-  {name:"Eran Nelinger",      role:"Ex-Google Senior Engineer & TL",        img:"/public/assets/speakers/eran-nelinger.jpg.jpg"},
-  {name:"Noa Shamay",         role:"Principal, Cardumen Capital",           img:"/public/assets/speakers/noa-shamay.jpg.jpg"},
-  {name:"Nir Klaiman",        role:"Senior Business Dev Manager, EY",       img:"/public/assets/speakers/nir-klaiman.jpg.jpg"},
-  {name:"נדב ביאר־דואני",     role:"מנהל הרציף // עיריית ת״א-יפו",          img:"/public/assets/speakers/nadav-biar-duani.jpg", initials:"NB"},
+  {name:"Gilad Hazan",        role:"Founder & CEO, GHgroup",                 asset:"speakers/gilad-hazan.jpg.jpg"},
+  {name:"Assaf Tzur-El",      role:"Startup Tech Advisor & Fractional CTO", asset:"speakers/assaf-tzur-el.jpg.jpg"},
+  {name:"Hadas Farhi",        role:"Senior Frontend & Design Systems",      asset:"speakers/hadas-farhi.jpg.jpg"},
+  {name:"Aviad Ben-laish",    role:"Principal, StageOne Ventures",          asset:"speakers/aviad-ben-laish.jpg.jpg"},
+  {name:"Lior Frimet",        role:"קשרי אקדמיה ותעשייה",                   asset:"speakers/lior-frimet.jpg.jpg"},
+  {name:"Ron Peled",          role:"Co-founder, Sola Security",             asset:"speakers/ron-peled.jpg.jpg"},
+  {name:"Tomer Kashi",        role:"Co-Founder & CEO, SkyWatch",            asset:"speakers/tomer-kashi.jpg.jpg"},
+  {name:"Omer Kalderon",      role:"General Partner, Day Zero VC",          asset:"speakers/omer-kalderon.jpg.jpg"},
+  {name:"Ela Perez",          role:"Venture Capital, Wix Ventures",         asset:"speakers/ela-perez.jpg.jpg"},
+  {name:"Koren Grinshpoon",   role:"Co-founder & COO, Echo3D",              asset:"speakers/koren-grinshpoon.jpg.jpg"},
+  {name:"Eran Nelinger",      role:"Ex-Google Senior Engineer & TL",        asset:"speakers/eran-nelinger.jpg.jpg"},
+  {name:"Noa Shamay",         role:"Principal, Cardumen Capital",           asset:"speakers/noa-shamay.jpg.jpg"},
+  {name:"Nir Klaiman",        role:"Senior Business Dev Manager, EY",       asset:"speakers/nir-klaiman.jpg.jpg"},
+  {name:"נדב ביאר־דואני",     role:"מנהל הרציף // עיריית ת״א-יפו",          fromStudio:true},
 ];
+
+/* Pull Nadav's exact <img src> out of studio.html */
+async function nadavFromStudio(){
+  if (NADAV_SRC) return NADAV_SRC;
+  for (const url of ["studio.html", "/studio.html", "public/studio.html"]){
+    try{
+      const r = await fetch(url); if (!r.ok) continue;
+      const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+      const imgs = [...doc.querySelectorAll("img")];
+      const isNadav = el => /נדב|ביאר|Nadav|Biar/i.test((el.getAttribute("alt")||"") + " " + (el.getAttribute("src")||"").slice(0,200));
+      let hit = imgs.find(isNadav);
+      if (!hit) hit = imgs.find(im => { let n=im; for(let k=0;k<5&&n;k++){ n=n.parentElement; if(n && /נדב ביאר|נדב/.test(n.textContent)) return true; } return false; });
+      if (hit){
+        const src = hit.getAttribute("src");
+        return src.startsWith("data:") ? src : new URL(src, r.url).href;
+      }
+    }catch(e){ /* file:// or missing — try next */ }
+  }
+  console.warn("[banners] Nadav's photo not found in studio.html — paste it into NADAV_SRC.");
+  return null;
+}
 
 const initialsOf = s => s.initials || s.name.split(/[\s-]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
 
 /* Crop to 4:5 (top-anchored) + grayscale on a canvas, so the PNG export matches the preview
-   (html2canvas ignores CSS filter and object-fit). Falls back to CSS if the canvas is tainted. */
+   (html2canvas ignores CSS filter and object-fit). Falls back to CSS grayscale if the canvas is tainted. */
 function processImage(src){
   return new Promise(resolve=>{
+    if (!src) return resolve({ok:false});
     const im = new Image();
     im.onload = () => {
       try{
@@ -277,7 +319,7 @@ function processImage(src){
 
 /* ---------- RENDER GRID ---------- */
 const grid = document.getElementById("grid");
-const jobs = SPEAKERS.map((s,i)=>{
+const jobs = SPEAKERS.map(async (s,i)=>{
   const card = document.createElement("div");
   card.className = "card";
   card.innerHTML = `
@@ -286,28 +328,31 @@ const jobs = SPEAKERS.map((s,i)=>{
   card.querySelector(".name").textContent = s.name;
   card.querySelector(".role").textContent = s.role;
   grid.appendChild(card);
-  return processImage(s.img).then(res=>{
-    if(!res.ok) return;
-    const img = document.createElement("img");
-    img.alt = s.name; img.src = res.url;
-    if(res.raw) img.className = "raw";
-    const ph = card.querySelector(".ph");
-    ph.querySelector(".avatar").replaceWith(img);
-  });
+
+  const src = s.fromStudio ? await nadavFromStudio() : await firstWorking(candidatesFor(s.asset));
+  const res = await processImage(src);
+  if (!res.ok){ console.warn("[banners] photo not found:", s.asset || "studio.html (Nadav)"); return; }
+  const img = document.createElement("img");
+  img.alt = s.name; img.src = res.url;
+  if (res.raw) img.className = "raw";
+  card.querySelector(".avatar").replaceWith(img);
 });
 
-/* ---------- LOGO FALLBACKS ---------- */
-document.querySelectorAll(".logo-cell").forEach(cell=>{
-  const img = cell.querySelector("img");
-  const fallback = () => {
+/* ---------- LOGOS ---------- */
+const logoJobs = [...document.querySelectorAll("img[data-asset]")].map(async img=>{
+  const url = await firstWorking(candidatesFor(img.dataset.asset));
+  if (url){ img.src = url; return; }
+  console.warn("[banners] logo not found:", img.dataset.asset);
+  if (img.dataset.fallback){
     const b = document.createElement("span");
-    b.className = "logo-badge" + (cell.dataset.he ? " he" : "");
-    b.textContent = cell.dataset.fallback;
+    b.className = "logo-badge" + (img.dataset.he ? " he" : "");
+    b.textContent = img.dataset.fallback;
     img.replaceWith(b);
-  };
-  if (img.complete && img.naturalWidth === 0) fallback();
-  else img.addEventListener("error", fallback);
+  } else {
+    img.remove();
+  }
 });
+jobs.push(...logoJobs);
 
 /* ---------- SCALE PREVIEW ---------- */
 const frame = document.getElementById("frame"), stage = document.getElementById("stage");
