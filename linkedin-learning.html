@@ -1,0 +1,419 @@
+<!doctype html>
+<!-- linkedin-learning.html · מסלול 02 · built on studio.html base · accents: magenta / lime on ink & paper -->
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkedIn Learning | תל &amp; tech</title>
+<meta name="description" content="מסלול 02 של תל & tech: גישה ישירה ומלאה ל-LinkedIn Learning בחסות עיר עולם ותיירות. קורסים, נתיבי למידה, תרגול מעשי ותעודות הסמכה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#fafbfb',
+          white: '#ffffff',
+          magenta: '#ff007f',
+          ink: '#1a1c23',
+          lime: '#ccff00'
+        },
+        fontFamily: {
+          sans: ['Heebo', 'Assistant', 'Arial', 'sans-serif'],
+          mono: ['"Space Mono"', '"Roboto Mono"', 'ui-monospace', 'monospace']
+        },
+        boxShadow: {
+          brut: '6px 6px 0 0 #000',
+          'brut-sm': '4px 4px 0 0 #000',
+          'brut-lg': '10px 10px 0 0 #000',
+          'brut-lime': '6px 6px 0 0 #ccff00'
+        }
+      }
+    }
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  body { background: #fafbfb; color: #1a1c23; overflow-x: hidden; }
+
+  /* Architectural grid: 1px minor lines every 40px, major lines every 160px */
+  .grid-bg {
+    background-color: #fafbfb;
+    background-image:
+      linear-gradient(to right, rgba(26,28,35,.20) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26,28,35,.20) 1px, transparent 1px),
+      linear-gradient(to right, rgba(26,28,35,.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26,28,35,.09) 1px, transparent 1px);
+    background-size: 160px 160px, 160px 160px, 40px 40px, 40px 40px;
+  }
+  .grid-bg-dark {
+    background-color: #1a1c23;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.12) 1px, transparent 1px),
+      linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 160px 160px, 160px 160px, 40px 40px, 40px 40px;
+  }
+  .grid-bg-sm {
+    background-color: #ffffff;
+    background-image:
+      linear-gradient(to right, rgba(26,28,35,.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26,28,35,.12) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .ticker { overflow: hidden; }
+  .ticker-track { display: flex; width: max-content; animation: ticker 32s linear infinite; }
+  .ticker:hover .ticker-track, .ticker:focus-within .ticker-track { animation-play-state: paused; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(50%); } }
+
+  .brut-btn { transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease; }
+  .brut-btn:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 0 #000; }
+  .brut-btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 0 #000; }
+  .cta-magenta { background: #ff007f; color: #000; }
+  .cta-magenta:hover, .cta-magenta:focus-visible { background: #ccff00; color: #000; }
+  .on-dark .brut-btn:hover { box-shadow: 9px 9px 0 0 #ccff00; }
+  .on-dark .brut-btn:active { box-shadow: 1px 1px 0 0 #ccff00; }
+
+  :focus-visible { outline: 4px solid #ff007f; outline-offset: 3px; }
+  .skip { position: absolute; inset-inline-start: 1rem; top: -100px; }
+  .skip:focus { top: 1rem; z-index: 100; }
+  .num { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body class="font-sans antialiased" dir="rtl">
+
+<a href="#main" class="skip bg-ink text-lime font-mono font-bold px-4 py-2 border-2 border-ink">דילוג לתוכן הראשי</a>
+
+<!-- ============ HEADER ============ -->
+<header dir="rtl" class="sticky top-0 z-50 bg-paper border-b-4 border-ink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap items-center gap-3">
+      <a href="https://tel-and-tech.vercel.app/"
+         class="brut-btn inline-flex items-center gap-2 bg-white border-2 border-ink shadow-brut-sm px-3 py-2 font-mono text-xs sm:text-sm font-bold">
+        <span aria-hidden="true">→</span>
+        <span>חזרה לכל מסלולי תל &amp; tech</span>
+      </a>
+      <a href="https://forms.monday.com/forms/5c0882b5ccdf11c9bee0b5b7702b575a?r=euc1" target="_blank" rel="noopener noreferrer"
+         class="brut-btn cta-magenta inline-flex items-center gap-2 border-2 border-ink shadow-brut-sm px-3 py-2 font-mono text-xs sm:text-sm font-bold">
+        <span>קבלת גישה</span>
+        <span aria-hidden="true">←</span>
+        <span class="sr-only">(נפתח בלשונית חדשה)</span>
+      </a>
+    </div>
+
+    <a href="#top" aria-label="תל &amp; tech, LinkedIn Learning – לראש העמוד" class="flex items-center gap-3 sm:gap-4">
+      <img src="/public/assets/logos/tel-and-tech.png" alt="תל &amp; tech" class="h-8 sm:h-9 w-auto">
+      <span class="w-px h-6 bg-ink/30" aria-hidden="true"></span>
+      <img src="/public/assets/logos/tlv-municipality.png" alt="עיריית תל אביב-יפו" class="h-7 sm:h-8 w-auto">
+    </a>
+  </div>
+
+  <nav aria-label="ניווט בעמוד" class="border-t-2 border-ink bg-ink">
+    <ul class="max-w-7xl mx-auto px-4 sm:px-6 flex gap-5 overflow-x-auto font-mono text-xs text-white py-2 whitespace-nowrap">
+      <li><a class="hover:text-magenta" href="#data"><bdi dir="ltr">[01]</bdi> בנתונים</a></li>
+      <li><a class="hover:text-magenta" href="#pillars"><bdi dir="ltr">[02]</bdi> עמודי התווך</a></li>
+      <li><a class="hover:text-magenta" href="#perk"><bdi dir="ltr">[03]</bdi> הטבה בלעדית</a></li>
+      <li><a class="hover:text-magenta" href="#library"><bdi dir="ltr">[04]</bdi> ספריית התכנים</a></li>
+      <li><a class="hover:text-magenta" href="#apply"><bdi dir="ltr">[05]</bdi> קבלת גישה</a></li>
+      <li aria-hidden="true" class="text-white/30">|</li>
+      <li><a class="hover:text-magenta text-lime" href="/studio.html"><bdi dir="ltr">TRACK 01</bdi> סטודיו יזמות</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" dir="rtl">
+
+<!-- ============ HERO ============ -->
+<section id="top" aria-labelledby="hero-title" class="grid-bg border-b-4 border-ink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-14 sm:pt-16 sm:pb-20 grid lg:grid-cols-12 gap-y-8 lg:gap-y-0 lg:gap-x-14">
+
+    <!-- Right col, part A: badge + headline -->
+    <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:self-end">
+      <p class="inline-block font-mono text-xs sm:text-sm font-bold bg-ink text-lime px-3 py-1.5 border-2 border-ink mb-6">
+        [ מסלול <bdi dir="ltr">02</bdi> // תל &amp; <bdi dir="ltr">tech</bdi> ]
+      </p>
+      <h1 id="hero-title" class="font-black leading-[1.15] tracking-tight text-5xl sm:text-6xl xl:text-7xl">
+        לפתח את המיומנויות הבאות שלך.
+        <span class="inline-block mt-4 bg-magenta border-4 border-ink px-3 py-1 text-black text-3xl sm:text-4xl xl:text-5xl">מבוסס על שוק הכישרונות הגדול בעולם.</span>
+      </h1>
+    </div>
+
+    <!-- Left col: track card -->
+    <div class="lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2 lg:self-center">
+      <div class="bg-white border-4 border-ink shadow-[10px_10px_0px_0px_#000] relative">
+        <span class="absolute top-3 right-3 bg-ink text-lime font-mono text-xs font-bold px-2.5 py-1 z-10" dir="ltr">TRACK_02</span>
+        <div class="grid-bg-sm p-8 pt-14 border-b-4 border-ink" dir="ltr">
+          <p class="font-mono text-xs font-bold text-ink/70">// TEL &amp; TECH × TEL AVIV GLOBAL</p>
+          <p class="font-black text-5xl sm:text-6xl leading-[0.95] tracking-tighter mt-3 text-black">
+            LinkedIn<br>
+            <span class="inline-block mt-2 bg-lime border-4 border-ink px-2">Learning</span>
+          </p>
+        </div>
+        <ul class="font-mono text-base sm:text-lg font-bold">
+          <li class="grid-bg-sm flex items-center gap-4 px-6 py-4 border-b-4 border-ink">
+            <span class="text-magenta" dir="ltr">/01/</span><span class="text-black">גישה חופשית</span>
+          </li>
+          <li class="flex items-center gap-4 px-6 py-4 border-b-4 border-ink bg-magenta text-black">
+            <span dir="ltr">/02/</span><span>מיומנויות מבוקשות</span>
+          </li>
+          <li class="flex items-center gap-4 px-6 py-4 bg-ink text-lime">
+            <span dir="ltr">/03/</span><span>תעודות הסמכה</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right col, part B: copy + CTAs -->
+    <div class="lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:self-start lg:mt-8">
+      <p class="max-w-2xl text-lg leading-relaxed font-medium border-s-8 border-magenta ps-5">
+        גישה ישירה ומלאה ל־<bdi dir="ltr">LinkedIn Learning</bdi> בחסות עיר עולם ותיירות.
+        בין אם בחרת לשדרג תפקיד, לחדד מיומנויות טכנולוגיות או לחשב מסלול מחדש בהייטק –
+        כל הידע המקצועי, ההסמכות והדאטה פתוחים עבורך.
+      </p>
+
+      <ul class="mt-6 space-y-2 font-bold">
+        <li class="flex items-center gap-3"><span class="font-mono text-magenta" aria-hidden="true">//</span>אלפי קורסים בטכנולוגיה, קוד, מוצר וניהול</li>
+        <li class="flex items-center gap-3"><span class="font-mono text-magenta" aria-hidden="true">//</span>המלצות אישיות מבוססות מגמות גיוס אמיתיות</li>
+        <li class="flex items-center gap-3"><span class="font-mono text-magenta" aria-hidden="true">//</span>תעודות שמופיעות ישירות בפרופיל הלינקדאין</li>
+      </ul>
+
+      <div class="mt-10 flex flex-wrap gap-4 items-center">
+        <a href="https://forms.monday.com/forms/5c0882b5ccdf11c9bee0b5b7702b575a?r=euc1" target="_blank" rel="noopener noreferrer"
+           class="brut-btn cta-magenta inline-flex items-center gap-3 border-4 border-ink shadow-brut px-6 py-4 text-lg sm:text-xl font-black">
+          הגשת מועמדות למסלול <bdi dir="ltr">02</bdi> <span aria-hidden="true">←</span>
+          <span class="sr-only">(נפתח בלשונית חדשה)</span>
+        </a>
+        <a href="#data" class="brut-btn inline-flex items-center gap-2 bg-white border-4 border-ink shadow-brut-sm px-5 py-3 font-mono text-sm font-bold">
+          מה יש בפנים <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker bg-ink border-t-4 border-ink overflow-hidden" aria-hidden="true">
+    <div class="ticker-track font-mono font-bold text-sm sm:text-base py-3 whitespace-nowrap text-lime">
+      <span class="px-6">● 26,500+ קורסים</span><span class="px-6">● 1,300+ נתיבי למידה</span><span class="px-6">● 120+ גופי הסמכה</span><span class="px-6">● GitHub Codespaces</span><span class="px-6">● 450+ Nano Tips</span><span class="px-6">● מפגש בלעדי במשרדי LinkedIn</span>
+      <span class="px-6">● 26,500+ קורסים</span><span class="px-6">● 1,300+ נתיבי למידה</span><span class="px-6">● 120+ גופי הסמכה</span><span class="px-6">● GitHub Codespaces</span><span class="px-6">● 450+ Nano Tips</span><span class="px-6">● מפגש בלעדי במשרדי LinkedIn</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA & STATS ============ -->
+<section id="data" aria-labelledby="data-title" class="border-b-4 border-ink bg-paper">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+      <div>
+        <p class="font-mono text-sm font-bold text-magenta mb-2"><bdi dir="ltr">[ 01 ] // BY THE NUMBERS</bdi></p>
+        <h2 id="data-title" class="font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight">הספרייה, בנתונים.</h2>
+      </div>
+      <p class="font-mono text-xs max-w-xs">הכול פתוח. הכול מתעדכן. הכול שלך לאורך התוכנית.</p>
+    </div>
+
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 border-t-4 border-s-4 border-ink bg-white">
+      <li class="lg:col-span-2 border-b-4 border-e-4 border-ink p-6 sm:p-8">
+        <p class="font-mono text-[11px] font-bold text-ink/60">COURSES</p>
+        <p class="num font-mono font-bold text-5xl sm:text-6xl mt-3 text-magenta" dir="ltr"><span class="count" data-to="26500">26,500</span>+</p>
+        <p class="font-bold mt-4 leading-snug">קורסים מקצועיים בתחומי טכנולוגיה, קוד, מוצר וניהול</p>
+      </li>
+      <li class="lg:col-span-2 border-b-4 border-e-4 border-ink p-6 sm:p-8">
+        <p class="font-mono text-[11px] font-bold text-ink/60">EXPERTS</p>
+        <p class="num font-mono font-bold text-5xl sm:text-6xl mt-3" dir="ltr"><span class="count" data-to="3900">3,900</span>+</p>
+        <p class="font-bold mt-4 leading-snug">מומחי תעשייה ומובילי דעה גלובליים</p>
+      </li>
+      <li class="lg:col-span-2 border-b-4 border-e-4 border-ink p-6 sm:p-8 bg-ink text-white">
+        <p class="font-mono text-[11px] font-bold text-white/60">LEARNING PATHS</p>
+        <p class="num font-mono font-bold text-5xl sm:text-6xl mt-3 text-lime" dir="ltr"><span class="count" data-to="1300">1,300</span>+</p>
+        <p class="font-bold mt-4 leading-snug">נתיבי למידה מודרכים (<bdi dir="ltr">Learning Paths</bdi>) להעמקת מיומנויות</p>
+      </li>
+      <li class="lg:col-span-3 border-b-4 border-e-4 border-ink p-6 sm:p-8">
+        <p class="font-mono text-[11px] font-bold text-ink/60">CERTIFICATIONS</p>
+        <p class="num font-mono font-bold text-5xl sm:text-6xl mt-3" dir="ltr"><span class="count" data-to="120">120</span>+</p>
+        <p class="font-bold mt-4 leading-snug">גופי הסמכה ותעודות מקצועיות בינלאומיות</p>
+      </li>
+      <li class="sm:col-span-2 lg:col-span-3 border-b-4 border-e-4 border-ink p-6 sm:p-8">
+        <p class="font-mono text-[11px] font-bold text-ink/60">LANGUAGES</p>
+        <p class="num font-mono font-bold text-5xl sm:text-6xl mt-3" dir="ltr"><span class="count" data-to="20">20</span>+ <span class="text-magenta text-3xl sm:text-4xl">/ 7</span></p>
+        <p class="font-bold mt-4 leading-snug">שפות תרגום ו־<bdi dir="ltr">7</bdi> ספריות בשפת אם</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ VALUE PILLARS ============ -->
+<section id="pillars" aria-labelledby="pillars-title" class="border-b-4 border-ink grid-bg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <p class="font-mono text-sm font-bold text-magenta mb-2"><bdi dir="ltr">[ 02 ] // VALUE PILLARS</bdi></p>
+    <h2 id="pillars-title" class="font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight">עמודי התווך של המסלול</h2>
+    <p class="mt-4 max-w-2xl text-lg font-medium">לא עוד ספריית וידאו. מערכת למידה שמחוברת לשוק העבודה, לתרגול אמיתי ולהסמכה שרואים.</p>
+
+    <ul class="mt-12 grid sm:grid-cols-2 gap-6">
+      <li class="bg-white border-4 border-ink shadow-brut flex flex-col">
+        <div class="flex items-center justify-between gap-4 px-6 py-4 border-b-4 border-ink">
+          <span class="font-mono font-bold text-4xl text-magenta" dir="ltr">01</span>
+          <span class="font-mono text-[11px] font-bold bg-ink text-white px-2 py-1" dir="ltr">DATA-DRIVEN</span>
+        </div>
+        <div class="p-6 sm:p-8 flex-1">
+          <h3 class="font-black text-2xl sm:text-3xl leading-tight">התאמה אישית חכמה מבוססת דאטה</h3>
+          <p class="mt-4 font-medium leading-relaxed">הפלטפורמה מנתחת מגמות גיוס וביקוש מתוך רשת <bdi dir="ltr">LinkedIn</bdi> העולמית, וממליצה על קורסים מותאמים אישית. כולל הערכות מיומנות (<bdi dir="ltr">Skill Assessments</bdi>) ומדריך ייעודי ליותר מ־<bdi dir="ltr">35</bdi> תפקידים מבוקשים.</p>
+        </div>
+      </li>
+      <li class="bg-white border-4 border-ink shadow-brut flex flex-col">
+        <div class="flex items-center justify-between gap-4 px-6 py-4 border-b-4 border-ink">
+          <span class="font-mono font-bold text-4xl text-magenta" dir="ltr">02</span>
+          <span class="font-mono text-[11px] font-bold bg-ink text-white px-2 py-1" dir="ltr">HANDS-ON</span>
+        </div>
+        <div class="p-6 sm:p-8 flex-1">
+          <h3 class="font-black text-2xl sm:text-3xl leading-tight">תרגול מעשי (<bdi dir="ltr">Hands-on</bdi>) וסביבות פיתוח</h3>
+          <p class="mt-4 font-medium leading-relaxed">למידה פרקטית עם מעל <bdi dir="ltr">10,000</bdi> קבצי תרגול, <bdi dir="ltr">300,000</bdi> שאלות ידע, וסביבות קידוד וירטואליות בזמן אמת מבוססות <bdi dir="ltr">GitHub Codespaces</bdi>.</p>
+        </div>
+      </li>
+      <li class="bg-white border-4 border-ink shadow-brut flex flex-col">
+        <div class="flex items-center justify-between gap-4 px-6 py-4 border-b-4 border-ink">
+          <span class="font-mono font-bold text-4xl text-magenta" dir="ltr">03</span>
+          <span class="font-mono text-[11px] font-bold bg-ink text-white px-2 py-1" dir="ltr">FLEXIBLE</span>
+        </div>
+        <div class="p-6 sm:p-8 flex-1">
+          <h3 class="font-black text-2xl sm:text-3xl leading-tight">פורמטים גמישים לכל לוח זמנים</h3>
+          <p class="mt-4 font-medium leading-relaxed">למידה שמתאימה לקצב שלך – מפורמטים מהירים וממוקדים של <bdi dir="ltr">450+ Nano Tips</bdi> ליישום מיידי, ועד קורסי עומק בווידאו, אודיו וטקסט.</p>
+        </div>
+      </li>
+      <li class="bg-white border-4 border-ink shadow-brut flex flex-col">
+        <div class="flex items-center justify-between gap-4 px-6 py-4 border-b-4 border-ink">
+          <span class="font-mono font-bold text-4xl text-magenta" dir="ltr">04</span>
+          <span class="font-mono text-[11px] font-bold bg-ink text-white px-2 py-1" dir="ltr">CERTIFIED</span>
+        </div>
+        <div class="p-6 sm:p-8 flex-1">
+          <h3 class="font-black text-2xl sm:text-3xl leading-tight">תעודות מקצועיות והסמכות מובילות</h3>
+          <p class="mt-4 font-medium leading-relaxed">מעל <bdi dir="ltr">2,000</bdi> קורסים המכינים להסמכות רשמיות של חברות כמו <bdi dir="ltr">Microsoft</bdi>, <bdi dir="ltr">Zendesk</bdi>, <bdi dir="ltr">LambdaTest</bdi> ו־<bdi dir="ltr">Blue Prism</bdi> – כולל נקודות זכות אקדמיות ותעודות שמוצגות ישירות בפרופיל הלינקדאין שלך.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ EXCLUSIVE PERK ============ -->
+<section id="perk" aria-labelledby="perk-title" class="on-dark border-b-4 border-ink grid-bg-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-8">
+      <p class="font-mono text-sm font-bold text-lime mb-4"><bdi dir="ltr">[ 03 ] // EXCLUSIVE PERK</bdi></p>
+      <h2 id="perk-title" class="font-black leading-[1.15] tracking-tight text-4xl sm:text-5xl lg:text-6xl">
+        הזמנה בלעדית למפגש פיזי
+        <span class="block mt-2 text-lime">במשרדי <bdi dir="ltr">LinkedIn</bdi> ישראל.</span>
+      </h2>
+      <p class="mt-8 max-w-2xl text-lg leading-relaxed font-medium text-white/85 border-s-8 border-magenta ps-5">
+        יוזרים מצטיינים שיפגינו שימוש נרחב, התמדה ופעילות גבוהה בפלטפורמה לאורך התוכנית –
+        יוזמנו למפגש פיזי סגור, מעשיר וייחודי במשרדי לינקדאין בתל אביב.
+      </p>
+    </div>
+    <div class="lg:col-span-4">
+      <div class="bg-white text-ink border-4 border-white shadow-brut-lime font-mono">
+        <div class="px-6 py-5 border-b-4 border-ink">
+          <p class="text-[11px] font-bold text-ink/60" dir="ltr">ACCESS_LEVEL</p>
+          <p class="font-bold text-3xl mt-1" dir="ltr">INVITE <span class="text-magenta">ONLY</span></p>
+        </div>
+        <ul class="p-6 space-y-2 text-sm font-bold">
+          <li class="flex gap-3"><span class="text-magenta" aria-hidden="true">//</span><span>שימוש נרחב</span></li>
+          <li class="flex gap-3"><span class="text-magenta" aria-hidden="true">//</span><span>התמדה לאורך התוכנית</span></li>
+          <li class="flex gap-3"><span class="text-magenta" aria-hidden="true">//</span><span>פעילות גבוהה בפלטפורמה</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTENT LIBRARY ============ -->
+<section id="library" aria-labelledby="library-title" class="border-b-4 border-ink bg-paper">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+    <div>
+      <p class="font-mono text-sm font-bold text-magenta mb-2"><bdi dir="ltr">[ 04 ] // CONTENT LIBRARY</bdi></p>
+      <h2 id="library-title" class="font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight">סקרנים לראות מה מחכה לכם בפנים?</h2>
+      <p class="mt-4 max-w-xl text-lg font-medium">קטלוג הקורסים המלא פתוח לעיון – לפי תחום, תפקיד ומיומנות.</p>
+    </div>
+    <a href="https://business.linkedin.com/learn/content-library" target="_blank" rel="noopener noreferrer"
+       class="brut-btn shrink-0 inline-flex items-center gap-3 bg-lime text-black border-4 border-ink shadow-brut px-6 py-4 text-lg sm:text-xl font-black">
+      לקטלוג הקורסים המלא <span aria-hidden="true" dir="ltr">↗</span>
+      <span class="sr-only">(נפתח בלשונית חדשה)</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="apply" aria-labelledby="cta-title" class="border-b-4 border-ink grid-bg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28 flex flex-col items-start">
+    <p class="font-mono text-sm font-bold text-magenta mb-4"><bdi dir="ltr">[ 05 ] // GET ACCESS</bdi></p>
+    <h2 id="cta-title" class="font-black leading-[1.1] tracking-tight text-5xl sm:text-7xl lg:text-8xl">
+      המיומנות הבאה שלך
+      <span class="inline-block mt-3 bg-magenta border-4 border-ink px-3 py-1 text-black">כבר כאן.</span>
+    </h2>
+    <a href="https://forms.monday.com/forms/5c0882b5ccdf11c9bee0b5b7702b575a?r=euc1" target="_blank" rel="noopener noreferrer"
+       class="brut-btn cta-magenta mt-12 inline-flex items-center gap-3 border-4 border-ink shadow-brut px-7 py-5 text-xl sm:text-2xl font-black">
+      הגשת מועמדות למסלול <bdi dir="ltr">02</bdi> <span aria-hidden="true">←</span>
+      <span class="sr-only">(נפתח בלשונית חדשה)</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer dir="rtl" class="bg-ink text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <ul aria-label="שותפי התכנית" class="grid grid-cols-2 md:grid-cols-4 border-t-2 border-s-2 border-white/40">
+      <li class="border-b-2 border-e-2 border-white/40 p-6 flex items-center justify-center min-h-[90px]">
+        <img src="/public/assets/logos/the-platform-light.png" alt="הרציף" class="h-14 max-h-14 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity" loading="lazy">
+      </li>
+      <li class="border-b-2 border-e-2 border-white/40 p-6 flex items-center justify-center min-h-[90px]">
+        <img src="/public/assets/logos/tel-aviv-tech.png" alt="תל אביב טק" class="h-9 max-h-9 max-w-[130px] w-auto object-contain brightness-0 invert opacity-85 hover:opacity-100 transition-opacity" loading="lazy">
+      </li>
+      <li class="border-b-2 border-e-2 border-white/40 p-6 flex items-center justify-center min-h-[90px]">
+        <img src="/public/assets/logos/tel-aviv-global.png" alt="עיר עולם ותיירות" class="h-9 max-h-9 max-w-[130px] w-auto object-contain brightness-0 invert opacity-85 hover:opacity-100 transition-opacity" loading="lazy">
+      </li>
+      <li class="border-b-2 border-e-2 border-white/40 p-6 flex items-center justify-center min-h-[90px]">
+        <img src="/public/assets/logos/tlv-municipality.png" alt="עיריית תל אביב-יפו" class="h-9 max-h-9 max-w-[130px] w-auto object-contain brightness-0 invert opacity-85 hover:opacity-100 transition-opacity" loading="lazy">
+      </li>
+    </ul>
+    <div class="mt-10 flex flex-wrap justify-between gap-4 font-mono text-xs text-white/70">
+      <p>הרציף · הגליל 6, נווה שאנן, תל אביב-יפו</p>
+      <p><a href="https://tel-and-tech.vercel.app/" class="underline underline-offset-4 hover:text-magenta">כל מסלולי תל &amp; <bdi dir="ltr">tech</bdi></a> · <bdi dir="ltr">© 2026 TEL &amp; TECH // TRACK 02</bdi></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Count-up for the stats grid (static numbers stay if JS or motion is off)
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    var fmt = new Intl.NumberFormat('en-US');
+    var els = document.querySelectorAll('.count');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, to = +el.dataset.to, t0 = null, dur = 1100;
+        function step(t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / dur, 1);
+          el.textContent = fmt.format(Math.round(to * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        el.textContent = '0';
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
