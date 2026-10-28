@@ -1,1 +1,369 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>תל & tech // יזמות — Master Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Inter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --orange:#FF6633;
+    --acid:#C6FF00;
+    --ink:#0A0A0A;
+    --paper:#F4F1EA;
+    --grid:rgba(10,10,10,.07);
+    --mono:'Space Mono','Assistant',monospace;
+    --sans:'Assistant','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#1b1b1b;font-family:var(--sans);color:var(--ink);min-height:100vh}
 
+  /* ---------- CONTROLS ---------- */
+  .controls{
+    position:sticky;top:0;z-index:10;display:flex;gap:12px;align-items:center;justify-content:center;
+    flex-wrap:wrap;padding:14px 16px;background:#111;border-bottom:2px solid #000;
+  }
+  .btn{
+    font-family:var(--sans);font-weight:800;font-size:17px;cursor:pointer;
+    background:var(--orange);color:#000;border:2px solid #000;padding:10px 22px;
+    box-shadow:4px 4px 0 var(--acid);transition:transform .08s,box-shadow .08s;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--acid)}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--acid)}
+  .btn[disabled]{opacity:.6;cursor:wait}
+  .btn.ghost{background:#fff;box-shadow:4px 4px 0 var(--orange)}
+  .status{font-family:var(--mono);font-size:12px;color:#aaa;direction:ltr}
+
+  /* ---------- PREVIEW (scaled) ---------- */
+  .viewport{display:flex;justify-content:center;padding:28px 16px 60px;direction:ltr}
+  .frame{position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  #stage{width:1080px;height:1350px;transform-origin:top left;position:absolute;top:0;left:0}
+
+  /* ---------- BANNER ---------- */
+  #banner{
+    direction:rtl;width:1080px;height:1350px;position:relative;overflow:hidden;
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:36px 36px;
+    border:2px solid var(--ink);
+    display:flex;flex-direction:column;
+  }
+
+  /* top meta strip */
+  .meta{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 44px;border-bottom:2px solid var(--ink);background:var(--ink);color:#fff;
+    font-family:var(--mono);font-size:13px;
+  }
+  .meta .dot{display:inline-block;width:10px;height:10px;background:var(--acid);margin-left:8px;vertical-align:middle}
+
+  /* logos */
+  .logos{display:flex;align-items:stretch;gap:0;padding:22px 44px 0}
+  .logo-cell{
+    height:78px;padding:10px 18px;border:2px solid var(--ink);background:#fff;
+    display:flex;align-items:center;justify-content:center;margin-left:-2px;
+  }
+  .logo-cell img{height:56px;width:auto;display:block}
+  .logo-badge{
+    font-family:var(--mono);font-weight:700;font-size:20px;direction:ltr;white-space:nowrap;
+  }
+  .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:24px;direction:rtl}
+  .logos .spacer{flex:1}
+  .partner-tag{
+    align-self:center;font-family:var(--mono);font-size:12px;border:2px solid var(--ink);
+    padding:6px 10px;background:var(--acid);direction:ltr;
+  }
+
+  /* hero */
+  .hero{padding:26px 44px 0;position:relative}
+  .cat-badge{
+    display:inline-block;background:var(--acid);border:2px solid var(--ink);
+    padding:6px 14px;font-family:var(--mono);font-weight:700;font-size:20px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .headline{
+    font-family:var(--sans);font-weight:800;font-size:74px;line-height:1.0;
+    margin-top:22px;max-width:960px;
+  }
+  .headline .hl{background:var(--ink);color:var(--paper);padding:0 12px}
+  .mark-row{display:flex;align-items:center;gap:18px;margin-top:24px}
+  .mark{
+    background:var(--orange);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);
+    padding:10px 22px 14px;font-family:var(--sans);font-weight:800;font-size:54px;line-height:1;
+    color:#000;white-space:nowrap;
+  }
+  .mark .tech{font-family:'Inter',sans-serif;font-weight:800}
+  .mark .sl{font-family:var(--mono);font-weight:700;font-size:44px}
+  .mark-note{font-family:var(--mono);font-size:14px;line-height:1.5;border-right:4px solid var(--orange);padding-right:12px}
+
+  /* speakers */
+  .speakers{padding:26px 44px 0;flex:1}
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px;
+  }
+  .sec-head h2{font-size:30px;font-weight:800}
+  .sec-head .count{font-family:var(--mono);font-size:14px;background:var(--ink);color:var(--acid);padding:4px 10px;direction:ltr}
+  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:16px 14px}
+  .card{background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);position:relative}
+  .card .ph{width:100%;height:161px;border-bottom:2px solid var(--ink);overflow:hidden;background:#d9d6cf;position:relative}
+  .card .ph img{width:100%;height:100%;display:block}
+  .card .ph img.raw{object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.08)}
+  .card .num{
+    position:absolute;top:0;right:0;background:var(--acid);border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);
+    font-family:var(--mono);font-weight:700;font-size:11px;padding:1px 5px;direction:ltr;
+  }
+  .card .avatar{
+    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    background:var(--ink);color:var(--orange);font-family:var(--mono);font-weight:700;font-size:44px;direction:ltr;
+  }
+  .card .txt{padding:7px 7px 8px}
+  .card .name{font-weight:800;font-size:15px;line-height:1.1}
+  .card .role{font-family:var(--mono);font-size:10.5px;line-height:1.3;margin-top:4px;color:#333}
+  .card.host{background:var(--orange)}
+  .card.host .role{color:#000}
+
+  /* footer */
+  .footer{border-top:2px solid var(--ink);margin-top:24px}
+  .dates{display:grid;grid-template-columns:1fr 1fr 1.25fr;background:var(--ink);color:#fff}
+  .date-cell{padding:16px 24px;border-left:2px solid #333}
+  .date-cell:last-child{border-left:none}
+  .date-cell .lbl{font-size:18px;font-weight:700;color:#bbb}
+  .date-cell .val{font-family:var(--mono);font-weight:700;font-size:40px;line-height:1.1;direction:ltr;text-align:right}
+  .date-cell.hot .val{color:var(--orange)}
+  .date-cell.green .val{color:var(--acid)}
+  .facts{font-size:22px;font-weight:700;line-height:1.35}
+  .facts .sep{color:var(--orange);font-family:var(--mono);padding:0 6px}
+  .cta{
+    display:flex;justify-content:space-between;align-items:center;
+    background:var(--orange);padding:16px 44px;border-top:2px solid var(--ink);
+  }
+  .cta .lbl{font-size:26px;font-weight:800}
+  .cta .url{
+    font-family:var(--mono);font-weight:700;font-size:26px;direction:ltr;
+    background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:6px 16px;
+  }
+  .corner{
+    position:absolute;left:44px;top:132px;font-family:var(--mono);font-size:12px;
+    writing-mode:vertical-rl;transform:rotate(180deg);color:#555;direction:ltr;
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="btn" id="dl">הורדת באנר כתמונה (PNG)</button>
+  <button class="btn ghost" id="zoom">תצוגה 100%</button>
+  <span class="status" id="status">1080 × 1350 px</span>
+</div>
+
+<div class="viewport">
+  <div class="frame" id="frame">
+    <div id="stage">
+      <div id="banner">
+
+        <!-- META STRIP -->
+        <div class="meta">
+          <span><span class="dot"></span>TEL &amp; TECH // LAUNCHPAD</span>
+          <span>מחזור 2026 — הרציף, דרום ת״א</span>
+          <span style="direction:ltr">TRACK_01 / STUDIO</span>
+        </div>
+
+        <!-- LOGOS -->
+        <div class="logos">
+          <div class="logo-cell" data-fallback="עיריית תל אביב-יפו" data-he="1">
+            <img src="/public/assets/logos/tlv-municipality.png" alt="עיריית תל אביב-יפו">
+          </div>
+          <div class="logo-cell" data-fallback="הרציף" data-he="1">
+            <img src="/public/assets/logos/the-platform.png" alt="הרציף">
+          </div>
+          <div class="logo-cell" data-fallback="CityZone">
+            <img src="/public/assets/logos/cityzone.png" alt="CityZone">
+          </div>
+          <div class="spacer"></div>
+          <div class="partner-tag">IN PARTNERSHIP // 3 ORGS</div>
+        </div>
+
+        <span class="corner">1080x1350 — TLV.YAFO — N32.05 E34.76</span>
+
+        <!-- HERO -->
+        <div class="hero">
+          <span class="cat-badge">[ מסלול 01 // סטודיו יזמי מעשי ]</span>
+          <h1 class="headline">מניסיון עשיר בהייטק —<br><span class="hl">להקמת חברת סטארטאפ</span></h1>
+          <div class="mark-row">
+            <div class="mark">תל <span class="tech">&amp; tech</span> <span class="sl">//</span> יזמות</div>
+            <div class="mark-note">7 מפגשים מעשיים<br>מנטורים מהשטח<br>מרעיון למיזם</div>
+          </div>
+        </div>
+
+        <!-- SPEAKERS -->
+        <div class="speakers">
+          <div class="sec-head">
+            <h2>המרצים והמנטורים</h2>
+            <span class="count">[ 14 MENTORS ]</span>
+          </div>
+          <div class="grid" id="grid"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+          <div class="dates">
+            <div class="date-cell hot">
+              <div class="lbl">דדליין להגשת מועמדות</div>
+              <div class="val">10.11.2026</div>
+            </div>
+            <div class="date-cell green">
+              <div class="lbl">יום מיונים</div>
+              <div class="val">19.11.2026</div>
+            </div>
+            <div class="date-cell">
+              <div class="facts">7 מפגשים<span class="sep">|</span>490 ₪ למיזם<br><span style="font-size:17px;font-weight:600;color:#ccc">(ליחיד או צמד שותפים)</span><span class="sep">|</span><span style="font-size:17px">הרציף &amp; CityZone</span></div>
+            </div>
+          </div>
+          <div class="cta">
+            <span class="lbl">הגשת מועמדות ←</span>
+            <span class="url">tel-and-tech.vercel.app/studio.html</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- DATA ---------- */
+const SPEAKERS = [
+  {name:"Gilad Hazan",        role:"Founder & CEO, GHgroup",                 img:"/public/assets/speakers/gilad-hazan.jpg.jpg"},
+  {name:"Assaf Tzur-El",      role:"Startup Tech Advisor & Fractional CTO", img:"/public/assets/speakers/assaf-tzur-el.jpg.jpg"},
+  {name:"Hadas Farhi",        role:"Senior Frontend & Design Systems",      img:"/public/assets/speakers/hadas-farhi.jpg.jpg"},
+  {name:"Aviad Ben-laish",    role:"Principal, StageOne Ventures",          img:"/public/assets/speakers/aviad-ben-laish.jpg.jpg"},
+  {name:"Lior Frimet",        role:"קשרי אקדמיה ותעשייה",                   img:"/public/assets/speakers/lior-frimet.jpg.jpg"},
+  {name:"Ron Peled",          role:"Co-founder, Sola Security",             img:"/public/assets/speakers/ron-peled.jpg.jpg"},
+  {name:"Tomer Kashi",        role:"Co-Founder & CEO, SkyWatch",            img:"/public/assets/speakers/tomer-kashi.jpg.jpg"},
+  {name:"Omer Kalderon",      role:"General Partner, Day Zero VC",          img:"/public/assets/speakers/omer-kalderon.jpg.jpg"},
+  {name:"Ela Perez",          role:"Venture Capital, Wix Ventures",         img:"/public/assets/speakers/ela-perez.jpg.jpg"},
+  {name:"Koren Grinshpoon",   role:"Co-founder & COO, Echo3D",              img:"/public/assets/speakers/koren-grinshpoon.jpg.jpg"},
+  {name:"Eran Nelinger",      role:"Ex-Google Senior Engineer & TL",        img:"/public/assets/speakers/eran-nelinger.jpg.jpg"},
+  {name:"Noa Shamay",         role:"Principal, Cardumen Capital",           img:"/public/assets/speakers/noa-shamay.jpg.jpg"},
+  {name:"Nir Klaiman",        role:"Senior Business Dev Manager, EY",       img:"/public/assets/speakers/nir-klaiman.jpg.jpg"},
+  {name:"נדב ביאר־דואני",     role:"מנהל הרציף // עיריית ת״א-יפו",          img:"/public/assets/speakers/nadav-biar-duani.jpg", initials:"NB", host:true},
+];
+
+const initialsOf = s => s.initials || s.name.split(/[\s-]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+
+/* Crop to 4:5 (top-anchored) + grayscale on a canvas, so the PNG export matches the preview
+   (html2canvas ignores CSS filter and object-fit). Falls back to CSS if the canvas is tainted. */
+function processImage(src){
+  return new Promise(resolve=>{
+    const im = new Image();
+    im.onload = () => {
+      try{
+        const W=400, H=500, r=W/H;
+        let sx=0, sy=0, sw=im.naturalWidth, sh=im.naturalHeight;
+        if (sw/sh > r){ sw = sh*r; sx = (im.naturalWidth - sw)/2; } else { sh = sw/r; }
+        const c = document.createElement("canvas"); c.width=W; c.height=H;
+        const ctx = c.getContext("2d");
+        ctx.drawImage(im, sx, sy, sw, sh, 0, 0, W, H);
+        const d = ctx.getImageData(0,0,W,H), p = d.data;
+        for (let i=0;i<p.length;i+=4){
+          let g = 0.299*p[i] + 0.587*p[i+1] + 0.114*p[i+2];
+          g = Math.max(0, Math.min(255, (g-128)*1.08 + 128));
+          p[i]=p[i+1]=p[i+2]=g;
+        }
+        ctx.putImageData(d,0,0);
+        resolve({ok:true, url:c.toDataURL("image/jpeg",0.92)});
+      }catch(e){ resolve({ok:true, url:src, raw:true}); }
+    };
+    im.onerror = () => resolve({ok:false});
+    im.src = src;
+  });
+}
+
+/* ---------- RENDER GRID ---------- */
+const grid = document.getElementById("grid");
+const jobs = SPEAKERS.map((s,i)=>{
+  const card = document.createElement("div");
+  card.className = "card" + (s.host ? " host" : "");
+  card.innerHTML = `
+    <div class="ph"><div class="avatar">${initialsOf(s)}</div><span class="num">${String(i+1).padStart(2,"0")}</span></div>
+    <div class="txt"><div class="name" dir="auto"></div><div class="role" dir="auto"></div></div>`;
+  card.querySelector(".name").textContent = s.name;
+  card.querySelector(".role").textContent = s.role;
+  grid.appendChild(card);
+  return processImage(s.img).then(res=>{
+    if(!res.ok) return;
+    const img = document.createElement("img");
+    img.alt = s.name; img.src = res.url;
+    if(res.raw) img.className = "raw";
+    const ph = card.querySelector(".ph");
+    ph.querySelector(".avatar").replaceWith(img);
+  });
+});
+
+/* ---------- LOGO FALLBACKS ---------- */
+document.querySelectorAll(".logo-cell").forEach(cell=>{
+  const img = cell.querySelector("img");
+  const fallback = () => {
+    const b = document.createElement("span");
+    b.className = "logo-badge" + (cell.dataset.he ? " he" : "");
+    b.textContent = cell.dataset.fallback;
+    img.replaceWith(b);
+  };
+  if (img.complete && img.naturalWidth === 0) fallback();
+  else img.addEventListener("error", fallback);
+});
+
+/* ---------- SCALE PREVIEW ---------- */
+const frame = document.getElementById("frame"), stage = document.getElementById("stage");
+let fullSize = false;
+function fit(){
+  const s = fullSize ? 1 : Math.min(1, (window.innerWidth - 32) / 1080);
+  stage.style.transform = `scale(${s})`;
+  frame.style.width = (1080*s) + "px";
+  frame.style.height = (1350*s) + "px";
+}
+window.addEventListener("resize", fit); fit();
+document.getElementById("zoom").addEventListener("click", e=>{
+  fullSize = !fullSize;
+  e.currentTarget.textContent = fullSize ? "התאמה למסך" : "תצוגה 100%";
+  fit();
+});
+
+/* ---------- EXPORT PNG ---------- */
+const status = document.getElementById("status");
+document.getElementById("dl").addEventListener("click", async e=>{
+  const btn = e.currentTarget;
+  btn.disabled = true; status.textContent = "rendering…";
+  try{
+    await Promise.all(jobs);
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    const y = window.scrollY; window.scrollTo(0,0);
+    const canvas = await html2canvas(document.getElementById("banner"), {
+      width:1080, height:1350, scale:1, useCORS:true, backgroundColor:"#F4F1EA",
+      onclone: doc => { doc.getElementById("stage").style.transform = "none"; }
+    });
+    window.scrollTo(0,y);
+    canvas.toBlob(blob=>{
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "tel-and-tech-yazamut-track01-1080x1350.png";
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+      status.textContent = "saved ✓ 1080 × 1350 px";
+    }, "image/png");
+  }catch(err){
+    console.error(err);
+    status.textContent = "export failed — open via a local server, not file://";
+  }finally{
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
