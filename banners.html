@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>תל & tech // יזמות — Master Banner</title>
+<title>תל & tech // יזמות — Banners</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Inter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -36,6 +36,13 @@
   .btn[disabled]{opacity:.6;cursor:wait}
   .btn.ghost{background:#fff;box-shadow:4px 4px 0 #FF6633}
   .status{font-family:'Space Mono','Assistant',sans-serif;font-size:12px;color:#aaa;direction:ltr}
+  .seg{display:flex;border:2px solid #000;box-shadow:4px 4px 0 #C6FF00}
+  .seg button{font-family:'Assistant','Inter',sans-serif;font-weight:800;font-size:16px;cursor:pointer;border:0;padding:10px 16px;background:#2a2a2a;color:#ddd}
+  .seg button + button{border-right:2px solid #000}
+  .seg button.on{background:#C6FF00;color:#000}
+  .pick{font-family:'Assistant','Inter',sans-serif;font-weight:700;font-size:16px;padding:9px 12px;border:2px solid #000;background:#fff;color:#000;min-width:240px}
+  .ctl-sep{width:2px;height:34px;background:#333}
+  .controls [hidden]{display:none !important}
 
   /* ---------- PREVIEW (scaled) ---------- */
   .viewport{display:flex;justify-content:center;padding:28px 16px 60px;direction:ltr}
@@ -160,6 +167,42 @@
   .partners .logo-badge.he{font-size:17px}
   .partners .logo-badge.acid{color:#C6FF00}
 
+  /* ---------- MODES ---------- */
+  #banner.mode-master .spot-only{display:none !important}
+  #banner.mode-spot .master-only{display:none !important}
+
+  /* ---------- SPOTLIGHT ---------- */
+  .spot-hero{padding:24px 44px 0;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .spot-tags{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+  .spot-tag{display:inline-block;background:#0A0A0A;color:#F4F1EA;font-weight:800;font-size:24px;line-height:1.1;padding:7px 16px}
+  .spot-mark-card{background:#FFFFFF;border:4px solid #0A0A0A;box-shadow:8px 8px 0 #0A0A0A;padding:10px 16px;margin-left:8px;display:flex;align-items:center}
+  .spot-mark{display:block;height:112px;width:auto;max-width:440px;object-fit:contain}
+
+  .spot-body{
+    flex:1;min-height:0;padding:30px 44px 30px;
+    display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:40px;align-items:center;
+  }
+  .spot-info{min-width:0;display:flex;flex-direction:column;gap:26px;text-align:right}
+  .spot-kicker{font-family:'Space Mono','Assistant',sans-serif;font-weight:700;font-size:16px;color:#0A0A0A;direction:ltr;text-align:right}
+  .spot-name{font-weight:800;font-size:64px;line-height:.98;color:#0A0A0A;overflow-wrap:anywhere;text-align:right}
+  .spot-role{font-family:'Space Mono','Assistant',sans-serif;font-size:21px;line-height:1.35;color:#222222;
+    border-right:6px solid #FF6633;padding-right:16px;overflow-wrap:anywhere;text-align:right}
+  .spot-topics{background:#C6FF00;color:#0A0A0A;border:3px solid #0A0A0A;box-shadow:8px 8px 0 #0A0A0A;padding:18px 24px 20px;margin-left:8px}
+  .spot-topics h3{display:inline-block;background:#0A0A0A;background-color:#0A0A0A;color:#C6FF00;border:2px solid #0A0A0A;font-family:'Assistant','Inter',sans-serif;font-weight:800;font-size:24px;line-height:1.15;letter-spacing:.02em;padding:6px 14px;margin:0 0 16px}
+  .spot-topics h3 .sl{font-family:'Space Mono','Assistant',sans-serif;font-weight:700;color:#FF6633;margin-left:8px}
+  .spot-topics ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .spot-topics li{font-weight:800;font-size:21px;line-height:1.2;display:flex;gap:10px;align-items:baseline;color:#0A0A0A}
+  .spot-topics li b{font-family:'Space Mono','Assistant',sans-serif;color:#FF6633;font-size:19px;flex:0 0 auto}
+
+  .spot-photo{position:relative;width:520px;aspect-ratio:4/5;border:4px solid #0A0A0A;box-shadow:10px 10px 0 #FF6633;background:#d9d6cf;overflow:hidden}
+  .spot-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:top}
+  .spot-photo img.raw{filter:grayscale(1) contrast(1.08)}
+  .spot-photo .avatar{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    background:#3a3a3a;color:#e6e6e6;font-family:'Space Mono','Assistant',sans-serif;font-weight:700;font-size:120px;direction:ltr}
+  .spot-num{position:absolute;top:0;right:0;z-index:2;background:#C6FF00;color:#0A0A0A;
+    border-left:4px solid #0A0A0A;border-bottom:4px solid #0A0A0A;
+    font-family:'Space Mono','Assistant',sans-serif;font-weight:700;font-size:30px;line-height:1;padding:8px 14px;direction:ltr}
+
   /* explicit colors for html2canvas */
   .card{background-color:#FFFFFF}
   .card .txt{background-color:#FFFFFF;color:#0A0A0A}
@@ -179,7 +222,15 @@
 <body>
 
 <div class="controls">
+  <div class="seg" role="tablist">
+    <button id="modeMaster" class="on" role="tab">באנר כללי (14 דוברים)</button>
+    <button id="modeSpot" role="tab">באנר אישי (Spotlight)</button>
+  </div>
+  <span class="ctl-sep"></span>
   <button class="btn" id="dl">הורדת באנר כתמונה (PNG)</button>
+  <select class="pick" id="pick" hidden></select>
+  <button class="btn" id="dlOne" hidden>הורדת באנר זה (PNG)</button>
+  <button class="btn ghost" id="dlAll" hidden>הורדת כל 14 הבאנרים (רצף)</button>
   <button class="btn ghost" id="zoom">תצוגה 100%</button>
   <span class="status" id="status">1080 × 1350 px</span>
 </div>
@@ -187,7 +238,7 @@
 <div class="viewport">
   <div class="frame" id="frame">
     <div id="stage">
-      <div id="banner">
+      <div id="banner" class="mode-master">
 
         <!-- MUNICIPAL HEADER STRIP -->
         <div class="muni-strip">
@@ -198,11 +249,11 @@
         <div class="meta">
           <span><span class="dot"></span>תל <span style="font-family:'Inter',sans-serif">&amp; tech</span> // סטודיו יזמות</span>
           <span>מחזור 2026 — הרציף</span>
-          <span style="direction:ltr">TRACK_01 // STUDIO</span>
+          <span style="direction:ltr" id="trackLabel">TRACK_01 // STUDIO</span>
         </div>
 
-        <!-- HERO -->
-        <div class="hero">
+        <!-- HERO (master) -->
+        <div class="hero master-only">
           <span class="cat-badge">[ מסלול 01 // סטודיו יזמי מעשי ]</span>
           <h1 class="headline"><span class="l1">מניסיון עשיר בהייטק —</span><span class="hl">להקמת חברת סטארטאפ</span></h1>
           <div class="brand-row">
@@ -218,12 +269,38 @@
         </div>
 
         <!-- SPEAKERS -->
-        <div class="speakers">
+        <div class="speakers master-only">
           <div class="sec-head">
             <h2>המרצים והמנטורים</h2>
             <span class="count" style="direction:rtl">[ 14 דוברים ומנטורים ]</span>
           </div>
           <div class="grid" id="grid"></div>
+        </div>
+
+        <!-- SPOTLIGHT (individual speaker) -->
+        <div class="spot-hero spot-only">
+          <div class="spot-tags">
+            <span class="cat-badge">[ מסלול 01 // סטודיו יזמי מעשי ]</span>
+            <span class="spot-tag">מרצה אורח / מנטור</span>
+          </div>
+          <div class="spot-mark-card">
+            <img class="spot-mark" data-asset="logos/tel-and-tech-entrepreneurship.png" alt="תל & tech // יזמות">
+          </div>
+        </div>
+        <div class="spot-body spot-only">
+          <div class="spot-info">
+            <div class="spot-kicker" id="spotKicker">SPEAKER_01 / 14</div>
+            <h1 class="spot-name" id="spotName" dir="auto"></h1>
+            <div class="spot-role" id="spotRole" dir="auto"></div>
+            <div class="spot-topics">
+              <h3><span class="sl">//</span>על מה נדבר בסטודיו</h3>
+              <ul id="spotTopics"></ul>
+            </div>
+          </div>
+          <div class="spot-photo" id="spotPhoto">
+            <div class="avatar" id="spotAvatar"></div>
+            <span class="spot-num" id="spotNum">01</span>
+          </div>
         </div>
 
         <!-- FOOTER -->
@@ -279,21 +356,29 @@ async function firstWorking(urls){
    If left empty, the page reads it straight out of studio.html at load time (needs a server, not file://). */
 const NADAV_SRC = "";
 
+/* topics: what this speaker covers in the studio. Fill in the real session topics per speaker;
+   when empty, the spotlight shows the studio-format lines in DEFAULT_TOPICS (no claims about the person). */
+const DEFAULT_TOPICS = [
+  "סשן מעשי מתוך הניסיון בשטח",
+  "עבודה על המיזמים של המשתתפים",
+  "שאלות פתוחות ומנטורינג לצוותים",
+];
+
 const SPEAKERS = [
-  {name:"Gilad Hazan",        role:"Founder & CEO, GHgroup",                 asset:"speakers/gilad-hazan.jpg.jpg"},
-  {name:"Assaf Tzur-El",      role:"Startup Tech Advisor & Fractional CTO", asset:"speakers/assaf-tzur-el.jpg.jpg"},
-  {name:"Hadas Farhi",        role:"Senior Frontend Developer & Design Systems Consultant", asset:"speakers/hadas-farhi.jpg.jpg"},
-  {name:"Aviad Ben-laish",    role:"Principal, StageOne Ventures",          asset:"speakers/aviad-ben-laish.jpg.jpg"},
-  {name:"Lior Frimet",        role:"קשרי אקדמיה ותעשייה",                   asset:"speakers/lior-frimet.jpg.jpg"},
-  {name:"Ron Peled",          role:"Co-founder, Sola Security",             asset:"speakers/ron-peled.jpg.jpg"},
-  {name:"Tomer Kashi",        role:"Co-Founder & CEO, SkyWatch & VOOM Insurance", asset:"speakers/tomer-kashi.jpg.jpg"},
-  {name:"Omer Kalderon",      role:"General Partner, Day Zero VC",          asset:"speakers/omer-kalderon.jpg.jpg"},
-  {name:"Ela Perez",          role:"Venture Capital, Wix Ventures",         asset:"speakers/ela-perez.jpg.jpg"},
-  {name:"Koren Grinshpoon",   role:"Co-founder & COO, Echo3D",              asset:"speakers/koren-grinshpoon.jpg.jpg"},
-  {name:"Eran Nelinger",      role:"Ex-Google Senior Engineer & TL",        asset:"speakers/eran-nelinger.jpg.jpg"},
-  {name:"Noa Shamay",         role:"Principal, Cardumen Capital",           asset:"speakers/noa-shamay.jpg.jpg"},
-  {name:"Nir Klaiman",        role:"Senior Business Dev Manager, EY",       asset:"speakers/nir-klaiman.jpg.jpg"},
-  {name:"נדב ביאר־דואני",     role:"מנהל הרציף // עיריית ת״א-יפו",          fromStudio:true},
+  {name:"Gilad Hazan",        slug:"gilad-hazan",       role:"Founder & CEO, GHgroup",                 asset:"speakers/gilad-hazan.jpg.jpg",       topics:[]},
+  {name:"Assaf Tzur-El",      slug:"assaf-tzur-el",     role:"Startup Tech Advisor & Fractional CTO", asset:"speakers/assaf-tzur-el.jpg.jpg",     topics:[]},
+  {name:"Hadas Farhi",        slug:"hadas-farhi",       role:"Senior Frontend Developer & Design Systems Consultant", asset:"speakers/hadas-farhi.jpg.jpg", topics:[]},
+  {name:"Aviad Ben-laish",    slug:"aviad-ben-laish",   role:"Principal, StageOne Ventures",          asset:"speakers/aviad-ben-laish.jpg.jpg",   topics:[]},
+  {name:"Lior Frimet",        slug:"lior-frimet",       role:"קשרי אקדמיה ותעשייה",                   asset:"speakers/lior-frimet.jpg.jpg",       topics:[]},
+  {name:"Ron Peled",          slug:"ron-peled",         role:"Co-founder, Sola Security",             asset:"speakers/ron-peled.jpg.jpg",         topics:[]},
+  {name:"Tomer Kashi",        slug:"tomer-kashi",       role:"Co-Founder & CEO, SkyWatch & VOOM Insurance", asset:"speakers/tomer-kashi.jpg.jpg", topics:[]},
+  {name:"Omer Kalderon",      slug:"omer-kalderon",     role:"General Partner, Day Zero VC",          asset:"speakers/omer-kalderon.jpg.jpg",     topics:[]},
+  {name:"Ela Perez",          slug:"ela-perez",         role:"Venture Capital, Wix Ventures",         asset:"speakers/ela-perez.jpg.jpg",         topics:[]},
+  {name:"Koren Grinshpoon",   slug:"koren-grinshpoon",  role:"Co-founder & COO, Echo3D",              asset:"speakers/koren-grinshpoon.jpg.jpg",  topics:[]},
+  {name:"Eran Nelinger",      slug:"eran-nelinger",     role:"Ex-Google Senior Engineer & TL",        asset:"speakers/eran-nelinger.jpg.jpg",     topics:[]},
+  {name:"Noa Shamay",         slug:"noa-shamay",        role:"Principal, Cardumen Capital",           asset:"speakers/noa-shamay.jpg.jpg",        topics:[]},
+  {name:"Nir Klaiman",        slug:"nir-klaiman",       role:"Senior Business Dev Manager, EY",       asset:"speakers/nir-klaiman.jpg.jpg",       topics:[]},
+  {name:"Nadav Beyar-Douani",  slug:"nadav-beyar-douani", role:"מנהל הרציף // עיריית ת״א-יפו",          fromStudio:true,                            topics:[]},
 ];
 
 /* Pull Nadav's exact <img src> out of studio.html */
@@ -304,7 +389,7 @@ async function nadavFromStudio(){
       const r = await fetch(url); if (!r.ok) continue;
       const doc = new DOMParser().parseFromString(await r.text(), "text/html");
       const imgs = [...doc.querySelectorAll("img")];
-      const isNadav = el => /נדב|ביאר|Nadav|Biar/i.test((el.getAttribute("alt")||"") + " " + (el.getAttribute("src")||"").slice(0,200));
+      const isNadav = el => /נדב|ביאר|Nadav|Biar|Beyar/i.test((el.getAttribute("alt")||"") + " " + (el.getAttribute("src")||"").slice(0,200));
       let hit = imgs.find(isNadav);
       if (!hit) hit = imgs.find(im => { let n=im; for(let k=0;k<5&&n;k++){ n=n.parentElement; if(n && /נדב ביאר|נדב/.test(n.textContent)) return true; } return false; });
       if (hit){
@@ -327,7 +412,7 @@ function processImage(src){
     const im = new Image();
     im.onload = () => {
       try{
-        const W=400, H=500, r=W/H;
+        const W=1040, H=1300, r=W/H;
         let sx=0, sy=0, sw=im.naturalWidth, sh=im.naturalHeight;
         if (sw/sh > r){ sw = sh*r; sx = (im.naturalWidth - sw)/2; } else { sh = sw/r; }
         const c = document.createElement("canvas"); c.width=W; c.height=H;
@@ -350,6 +435,12 @@ function processImage(src){
 
 /* ---------- RENDER GRID ---------- */
 const grid = document.getElementById("grid");
+const photos = SPEAKERS.map(async s=>{
+  const src = s.fromStudio ? await nadavFromStudio() : await firstWorking(candidatesFor(s.asset));
+  const res = await processImage(src);
+  if (!res.ok){ console.warn("[banners] photo not found:", s.asset || "studio.html (Nadav)"); return null; }
+  return res;
+});
 const jobs = SPEAKERS.map(async (s,i)=>{
   const card = document.createElement("div");
   card.className = "card";
@@ -360,9 +451,8 @@ const jobs = SPEAKERS.map(async (s,i)=>{
   card.querySelector(".role").textContent = s.role;
   grid.appendChild(card);
 
-  const src = s.fromStudio ? await nadavFromStudio() : await firstWorking(candidatesFor(s.asset));
-  const res = await processImage(src);
-  if (!res.ok){ console.warn("[banners] photo not found:", s.asset || "studio.html (Nadav)"); return; }
+  const res = await photos[i];
+  if (!res) return;
   const img = document.createElement("img");
   img.alt = s.name; img.src = res.url;
   if (res.raw) img.className = "raw";
@@ -488,49 +578,126 @@ document.getElementById("zoom").addEventListener("click", e=>{
   fit();
 });
 
+/* ---------- SPOTLIGHT ---------- */
+const pad2 = n => String(n).padStart(2,"0");
+const banner = document.getElementById("banner");
+let spotIndex = 0;
+
+async function renderSpot(i){
+  spotIndex = i;
+  const s = SPEAKERS[i];
+  document.getElementById("spotKicker").textContent = `SPEAKER_${pad2(i+1)} / 14`;
+  document.getElementById("spotName").textContent = s.name;
+  document.getElementById("spotRole").textContent = s.role;
+  document.getElementById("spotNum").textContent = pad2(i+1);
+  const ul = document.getElementById("spotTopics"); ul.innerHTML = "";
+  (s.topics && s.topics.length ? s.topics : DEFAULT_TOPICS).forEach(t=>{
+    const li = document.createElement("li");
+    li.innerHTML = "<b>//</b><span></span>"; li.lastChild.textContent = t; ul.appendChild(li);
+  });
+  const box = document.getElementById("spotPhoto");
+  box.querySelectorAll("img").forEach(el=>el.remove());
+  const av = document.getElementById("spotAvatar");
+  av.textContent = initialsOf(s); av.style.display = "";
+  const res = await photos[i];
+  if (spotIndex !== i || !res) return;               // a newer selection won, or no photo
+  const img = document.createElement("img");
+  img.alt = s.name; img.src = res.url; if (res.raw) img.className = "raw";
+  await new Promise(r=>{ if (img.complete) r(); else { img.onload = r; img.onerror = r; } });
+  av.style.display = "none";
+  box.insertBefore(img, av);
+}
+
+/* ---------- MODES ---------- */
+const $ = id => document.getElementById(id);
+const pick = $("pick");
+SPEAKERS.forEach((s,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=`${pad2(i+1)} — ${s.name}`; pick.appendChild(o); });
+pick.addEventListener("change", ()=>renderSpot(+pick.value));
+
+function setMode(mode){
+  const spot = mode === "spot";
+  banner.classList.toggle("mode-master", !spot);
+  banner.classList.toggle("mode-spot", spot);
+  $("modeMaster").classList.toggle("on", !spot);
+  $("modeSpot").classList.toggle("on", spot);
+  $("dl").hidden = spot;
+  $("pick").hidden = $("dlOne").hidden = $("dlAll").hidden = !spot;
+  $("trackLabel").textContent = spot ? "TRACK_01 // SPEAKER SPOTLIGHT" : "TRACK_01 // STUDIO";
+  if (spot) renderSpot(+pick.value);
+}
+$("modeMaster").addEventListener("click", ()=>setMode("master"));
+$("modeSpot").addEventListener("click", ()=>setMode("spot"));
+
 /* ---------- EXPORT PNG ---------- */
 const status = document.getElementById("status");
-document.getElementById("dl").addEventListener("click", async e=>{
-  const btn = e.currentTarget;
-  btn.disabled = true; status.textContent = "rendering…";
-  try{
-    await Promise.all(jobs);
-    if (document.fonts && document.fonts.ready) await document.fonts.ready;
-    const y = window.scrollY; window.scrollTo(0,0);
-    const canvas = await html2canvas(document.getElementById("banner"), {
-      width: 1080,
-      height: 1350,
-      scale: 1,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: "#F4F1EA",
-      logging: false,
-      onclone: (clonedDoc) => {
-        const stage = clonedDoc.getElementById("stage");
-        if (stage) stage.style.transform = "none";
-        // remove box-shadow (and filters) in the cloned document — html2canvas paints hard shadows over the element face
-        clonedDoc.querySelectorAll("#banner, #banner *").forEach(el => {
-          el.style.boxShadow = "none";
-          el.style.filter = "none";
-        });
-      }
-    });
-    window.scrollTo(0,y);
-    canvas.toBlob(blob=>{
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "tel-and-tech-yazamut-track01-1080x1350.png";
-      a.click();
-      setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
-      status.textContent = "saved ✓ 1080 × 1350 px";
-    }, "image/png");
-  }catch(err){
-    console.error(err);
-    status.textContent = "export failed — open via a local server, not file://";
-  }finally{
-    btn.disabled = false;
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+const nextFrame = () => new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+
+async function exportPNG(filename){
+  await Promise.all(jobs);
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  await nextFrame();
+  const y = window.scrollY; window.scrollTo(0,0);
+  const canvas = await html2canvas(banner, {
+    width: 1080,
+    height: 1350,
+    scale: 1,
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: "#F4F1EA",
+    logging: false,
+    onclone: (clonedDoc) => {
+      const stage = clonedDoc.getElementById("stage");
+      if (stage) stage.style.transform = "none";
+      // remove box-shadow (and filters) in the cloned document — html2canvas paints hard shadows over the element face
+      clonedDoc.querySelectorAll("#banner, #banner *").forEach(el => {
+        el.style.boxShadow = "none";
+        el.style.filter = "none";
+      });
+    }
+  });
+  window.scrollTo(0,y);
+  const blob = await new Promise(r=>canvas.toBlob(r, "image/png"));
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+}
+
+function lockButtons(on){ ["dl","dlOne","dlAll","modeMaster","modeSpot","pick"].forEach(id=>$(id).disabled = on); }
+
+async function run(label, task){
+  lockButtons(true); status.textContent = label;
+  try{ await task(); }
+  catch(err){ console.error(err); status.textContent = "export failed — open via a local server, not file://"; return; }
+  finally{ lockButtons(false); }
+}
+
+$("dl").addEventListener("click", ()=>run("rendering…", async ()=>{
+  await exportPNG("tel-and-tech-yazamut-track01-1080x1350.png");
+  status.textContent = "saved ✓ 1080 × 1350 px";
+}));
+
+$("dlOne").addEventListener("click", ()=>run("rendering…", async ()=>{
+  const i = +pick.value;
+  await renderSpot(i);
+  await exportPNG(`tel-and-tech-spotlight-${pad2(i+1)}-${SPEAKERS[i].slug}.png`);
+  status.textContent = `saved ✓ ${pad2(i+1)} / 14`;
+}));
+
+$("dlAll").addEventListener("click", ()=>run("rendering 0 / 14…", async ()=>{
+  const back = +pick.value;
+  for (let i=0;i<SPEAKERS.length;i++){
+    status.textContent = `rendering ${i+1} / 14…`;
+    pick.value = i;
+    await renderSpot(i);
+    await exportPNG(`tel-and-tech-spotlight-${pad2(i+1)}-${SPEAKERS[i].slug}.png`);
+    await sleep(450);   // give the browser room between downloads
   }
-});
+  pick.value = back; await renderSpot(back);
+  status.textContent = "saved ✓ 14 / 14";
+}));
 </script>
 </body>
 </html>
