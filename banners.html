@@ -62,22 +62,27 @@
   }
   .meta .dot{display:inline-block;width:10px;height:10px;background:var(--acid);margin-left:8px;vertical-align:middle}
 
-  /* header: 3 municipal organizers, no boxes, thin dividers */
-  .logos{display:flex;align-items:center;gap:26px;padding:15px 44px 14px;border-bottom:2px solid var(--ink)}
-  .logos img{height:46px;width:auto;max-width:220px;display:block}
-  .logos .div{width:2px;height:40px;background:var(--ink);opacity:.35}
+  /* municipal header strip (full width, top edge) */
+  .muni-strip{display:block;width:100%;line-height:0;border-bottom:2px solid var(--ink)}
+  .muni-strip img{display:block;width:100%;height:auto}
+  /* fallback when the PNG is missing: plain cyan strip with the city tagline (no logo drawn) */
+  .muni-fallback{
+    display:flex;align-items:center;justify-content:flex-end;height:58px;padding:0 44px;
+    background:#00A9E0;color:#fff;font-family:'Inter',sans-serif;font-weight:800;
+    font-size:22px;letter-spacing:.18em;direction:ltr;line-height:1;
+  }
   .logo-badge{font-family:'Inter',sans-serif;font-weight:800;font-size:20px;direction:ltr;white-space:nowrap}
   .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:22px;direction:rtl}
 
   /* hero */
-  .hero{padding:18px 44px 0}
+  .hero{padding:22px 44px 0}
   .cat-badge{
     display:inline-block;background:var(--acid);border:2px solid var(--ink);
     padding:6px 14px;font-family:var(--mono);font-weight:700;font-size:20px;
     box-shadow:4px 4px 0 var(--ink);
   }
   .headline{
-    font-family:var(--sans);font-weight:800;font-size:54px;line-height:1.15;
+    font-family:var(--sans);font-weight:800;font-size:58px;line-height:1.2;
     margin-top:18px;max-width:980px;
   }
   .headline .l1{display:block}
@@ -94,7 +99,7 @@
     min-width:0;display:flex;align-items:center;justify-content:center;
     background:#fff;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:14px 20px;
   }
-  .mark-img{display:block;max-width:100%;max-height:146px;width:auto;height:auto;object-fit:contain}
+  .mark-img{display:block;height:144px;width:auto;max-width:100%;object-fit:contain}
   .details{
     min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;
     text-align:right;direction:rtl;
@@ -111,9 +116,9 @@
   }
   .sec-head h2{font-size:26px;font-weight:800}
   .sec-head .count{font-family:var(--mono);font-size:14px;background:var(--ink);color:var(--acid);padding:4px 10px;direction:ltr}
-  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px 14px}
-  .card{background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);position:relative}
-  .card .ph{width:100%;height:161px;border-bottom:2px solid var(--ink);overflow:hidden;background:#d9d6cf;position:relative}
+  .grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-auto-rows:auto;align-items:stretch;gap:12px 14px}
+  .card{background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);position:relative;display:flex;flex-direction:column}
+  .card .ph{width:100%;aspect-ratio:4/5;height:auto;flex:0 0 auto;border-bottom:2px solid var(--ink);overflow:hidden;background:#d9d6cf;position:relative}
   .card .ph img{width:100%;height:100%;display:block}
   .card .ph img.raw{object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.08)}
   .card .num{
@@ -126,7 +131,7 @@
   }
   .card .txt{padding:7px 7px 8px}
   .card .name{font-weight:800;font-size:15px;line-height:1.1}
-  .card .role{font-family:var(--mono);font-size:10.5px;line-height:1.3;margin-top:4px;color:#333}
+  .card .role{font-family:var(--mono);font-size:10.5px;line-height:1.3;margin-top:4px;color:#333;overflow-wrap:anywhere;hyphens:auto}
 
   /* footer */
   .footer{border-top:2px solid var(--ink);margin-top:14px}
@@ -171,20 +176,16 @@
     <div id="stage">
       <div id="banner">
 
+        <!-- MUNICIPAL HEADER STRIP -->
+        <div class="muni-strip" id="muniStrip">
+          <img data-asset="branding/municipal-header-strip.png" alt="Tel Aviv Nonstop City" data-strip="1">
+        </div>
+
         <!-- META STRIP -->
         <div class="meta">
           <span><span class="dot"></span>תל <span style="font-family:'Inter',sans-serif">&amp; tech</span> // סטודיו יזמות</span>
           <span>מחזור 2026 — הרציף</span>
           <span style="direction:ltr">TRACK_01 // STUDIO</span>
-        </div>
-
-        <!-- HEADER: municipal organizers (CityZone appears in the footer strip) -->
-        <div class="logos">
-          <img data-asset="logos/tlv-municipality.png" alt="עיריית תל אביב-יפו" data-fallback="עיריית תל אביב-יפו" data-he="1">
-          <span class="div"></span>
-          <img data-asset="logos/the-platform.png" alt="הרציף" data-fallback="הרציף" data-he="1">
-          <span class="div"></span>
-          <img data-asset="logos/tel-aviv-tech.png" alt="Tel Aviv Tech" data-fallback="Tel Aviv Tech">
         </div>
 
         <!-- HERO -->
@@ -268,11 +269,11 @@ const NADAV_SRC = "";
 const SPEAKERS = [
   {name:"Gilad Hazan",        role:"Founder & CEO, GHgroup",                 asset:"speakers/gilad-hazan.jpg.jpg"},
   {name:"Assaf Tzur-El",      role:"Startup Tech Advisor & Fractional CTO", asset:"speakers/assaf-tzur-el.jpg.jpg"},
-  {name:"Hadas Farhi",        role:"Senior Frontend & Design Systems",      asset:"speakers/hadas-farhi.jpg.jpg"},
+  {name:"Hadas Farhi",        role:"Senior Frontend Developer & Design Systems Consultant", asset:"speakers/hadas-farhi.jpg.jpg"},
   {name:"Aviad Ben-laish",    role:"Principal, StageOne Ventures",          asset:"speakers/aviad-ben-laish.jpg.jpg"},
   {name:"Lior Frimet",        role:"קשרי אקדמיה ותעשייה",                   asset:"speakers/lior-frimet.jpg.jpg"},
   {name:"Ron Peled",          role:"Co-founder, Sola Security",             asset:"speakers/ron-peled.jpg.jpg"},
-  {name:"Tomer Kashi",        role:"Co-Founder & CEO, SkyWatch",            asset:"speakers/tomer-kashi.jpg.jpg"},
+  {name:"Tomer Kashi",        role:"Co-Founder & CEO, SkyWatch & VOOM Insurance", asset:"speakers/tomer-kashi.jpg.jpg"},
   {name:"Omer Kalderon",      role:"General Partner, Day Zero VC",          asset:"speakers/omer-kalderon.jpg.jpg"},
   {name:"Ela Perez",          role:"Venture Capital, Wix Ventures",         asset:"speakers/ela-perez.jpg.jpg"},
   {name:"Koren Grinshpoon",   role:"Co-founder & COO, Echo3D",              asset:"speakers/koren-grinshpoon.jpg.jpg"},
@@ -394,6 +395,12 @@ function monochrome(url, hex){
 
 const logoJobs = [...document.querySelectorAll("img[data-asset]")].map(async img=>{
   const url = await firstWorking(candidatesFor(img.dataset.asset));
+  if (img.dataset.strip){
+    if (url){ img.src = url; return; }
+    console.warn("[banners] strip not found:", img.dataset.asset, "— using CSS fallback");
+    const f = document.createElement("div"); f.className = "muni-fallback"; f.textContent = "TEL AVIV NONSTOP CITY";
+    img.replaceWith(f); return;
+  }
   if (url){ img.src = await monochrome(url, img.dataset.mono || null); return; }
   console.warn("[banners] logo not found:", img.dataset.asset);
   if (img.dataset.fallback){
