@@ -63,13 +63,12 @@
   .meta .dot{display:inline-block;width:10px;height:10px;background:var(--acid);margin-left:8px;vertical-align:middle}
 
   /* municipal header strip (full width, top edge) */
-  /* official strip: never cropped; its white emblem tab hangs over the black meta bar.
-     --tab-overlap = how far the tab extends below the cyan band (tune to the asset). */
-  .muni-strip{--tab-overlap:16px;position:relative;z-index:10;width:100%;overflow:visible;line-height:0;margin-bottom:calc(-1 * var(--tab-overlap))}
+  /* official strip: never cropped, sits on top; the emblem tab hangs over the black meta bar.
+     --tab-overlap is measured from the image at load (transparent area under the cyan band);
+     18px is the starting value until the image has loaded. */
+  .muni-strip{--tab-overlap:18px;position:relative;z-index:20;width:100%;overflow:visible;line-height:0;margin-bottom:calc(-1 * var(--tab-overlap))}
   .muni-strip img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
-  .meta{position:relative;z-index:1}
-  /* if the emblem tab covers the right-hand meta label, raise this to push the label clear of it */
-  .meta > span:first-child{margin-right:var(--tab-clear,0px)}
+  .meta{position:relative;z-index:1;padding-left:120px} /* keeps TRACK_01 // STUDIO clear of the tab on the left */
   .logo-badge{font-family:'Inter',sans-serif;font-weight:800;font-size:20px;direction:ltr;white-space:nowrap}
   .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:22px;direction:rtl}
 
@@ -368,6 +367,42 @@ const jobs = SPEAKERS.map(async (s,i)=>{
     else console.warn("[banners] municipal-header-strip.png not found at any path");
   });
   jobs.push(new Promise(r => { if (strip.complete) r(); else { strip.addEventListener("load", r); strip.addEventListener("error", () => k >= alts.length && r()); } }));
+})();
+
+/* Close the gap: the PNG's canvas extends below the cyan band to make room for the tab.
+   Scan a column away from the tab (right side) to find where the band ends, and pull the
+   meta bar up by exactly the remaining height so it sits flush under the band. */
+function fitStripOverlap(){
+  const img = document.getElementById("muniStrip");
+  if (!img.naturalWidth) return;
+  try{
+    const c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const ctx = c.getContext("2d"); ctx.drawImage(img,0,0);
+    const x = Math.floor(c.width * 0.75);
+    const col = ctx.getImageData(x,0,1,c.height).data;
+    let start = -1, end = c.height;
+    for (let y=0;y<c.height;y++){
+      const a = col[y*4+3];
+      if (start < 0){ if (a > 200) start = y; }
+      else if (a < 40){ end = y; break; }
+    }
+    if (start < 0 || end >= c.height) return;              // no transparent zone: nothing hangs below
+    const k = img.clientWidth / c.width;
+    const overlap = Math.round((c.height - end) * k);
+    document.querySelector(".muni-strip").style.setProperty("--tab-overlap", overlap + "px");
+    /* find how far the hanging tab reaches across, and keep TRACK_01 // STUDIO clear of it */
+    const row = ctx.getImageData(0, Math.min(c.height-1, end + 4), c.width, 1).data;
+    let tabRight = -1;
+    for (let xx=0; xx<c.width/2; xx++) if (row[xx*4+3] > 40) tabRight = xx;
+    if (tabRight >= 0){
+      const pad = Math.max(120, Math.round(tabRight * k) + 28);
+      document.querySelector(".meta").style.paddingLeft = pad + "px";
+    }
+  }catch(e){ /* canvas blocked (file://) — keep the 18px default */ }
+}
+(function(){
+  const img = document.getElementById("muniStrip");
+  if (img.complete && img.naturalWidth) fitStripOverlap(); else img.addEventListener("load", fitStripOverlap);
 })();
 
 /* ---------- LOGOS ---------- */
