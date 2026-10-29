@@ -63,14 +63,8 @@
   .meta .dot{display:inline-block;width:10px;height:10px;background:var(--acid);margin-left:8px;vertical-align:middle}
 
   /* municipal header strip (full width, top edge) */
-  .muni-strip{display:block;width:100%;line-height:0;border-bottom:2px solid var(--ink)}
-  .muni-strip img{display:block;width:100%;height:auto}
-  /* fallback when the PNG is missing: plain cyan strip with the city tagline (no logo drawn) */
-  .muni-fallback{
-    display:flex;align-items:center;justify-content:flex-end;height:58px;padding:0 44px;
-    background:#00A9E0;color:#fff;font-family:'Inter',sans-serif;font-weight:800;
-    font-size:22px;letter-spacing:.18em;direction:ltr;line-height:1;
-  }
+  .muni-strip{width:100%;overflow:hidden;line-height:0}
+  .muni-strip img{display:block;width:100%;height:auto;object-fit:contain}
   .logo-badge{font-family:'Inter',sans-serif;font-weight:800;font-size:20px;direction:ltr;white-space:nowrap}
   .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:22px;direction:rtl}
 
@@ -177,8 +171,8 @@
       <div id="banner">
 
         <!-- MUNICIPAL HEADER STRIP -->
-        <div class="muni-strip" id="muniStrip">
-          <img data-asset="logos/municipal-header-strip.png" alt="Tel Aviv Nonstop City" data-strip="1">
+        <div class="muni-strip">
+          <img id="muniStrip" src="/public/assets/logos/municipal-header-strip.png" alt="עיריית תל אביב-יפו // TEL AVIV NONSTOP CITY">
         </div>
 
         <!-- META STRIP -->
@@ -356,6 +350,21 @@ const jobs = SPEAKERS.map(async (s,i)=>{
   card.querySelector(".avatar").replaceWith(img);
 });
 
+/* ---------- MUNICIPAL STRIP ----------
+   Shown only as the official image. If the server doesn't expose /public (e.g. Vite serves it at /),
+   the same file is retried at the equivalent path. No substitute graphic or text is ever drawn. */
+(function(){
+  const strip = document.getElementById("muniStrip");
+  const alts = candidatesFor("logos/municipal-header-strip.png");
+  let k = 0;
+  strip.addEventListener("error", () => {
+    while (k < alts.length && strip.src.endsWith(alts[k].replace(/^\//,""))) k++;
+    if (k < alts.length) strip.src = alts[k++];
+    else console.warn("[banners] municipal-header-strip.png not found at any path");
+  });
+  jobs.push(new Promise(r => { if (strip.complete) r(); else { strip.addEventListener("load", r); strip.addEventListener("error", () => k >= alts.length && r()); } }));
+})();
+
 /* ---------- LOGOS ---------- */
 /* Recolor a logo to one flat color on canvas (html2canvas ignores CSS filters).
    Transparent PNGs keep their shape; opaque logos on a light background use darkness as the mask. */
@@ -395,12 +404,6 @@ function monochrome(url, hex){
 
 const logoJobs = [...document.querySelectorAll("img[data-asset]")].map(async img=>{
   const url = await firstWorking(candidatesFor(img.dataset.asset));
-  if (img.dataset.strip){
-    if (url){ img.src = url; return; }
-    console.warn("[banners] strip not found:", img.dataset.asset, "— using CSS fallback");
-    const f = document.createElement("div"); f.className = "muni-fallback"; f.textContent = "TEL AVIV NONSTOP CITY";
-    img.replaceWith(f); return;
-  }
   if (url){ img.src = await monochrome(url, img.dataset.mono || null); return; }
   console.warn("[banners] logo not found:", img.dataset.asset);
   if (img.dataset.fallback){
