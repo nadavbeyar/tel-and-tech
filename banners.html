@@ -63,8 +63,13 @@
   .meta .dot{display:inline-block;width:10px;height:10px;background:var(--acid);margin-left:8px;vertical-align:middle}
 
   /* municipal header strip (full width, top edge) */
-  .muni-strip{width:100%;overflow:hidden;line-height:0}
-  .muni-strip img{display:block;width:100%;height:auto;object-fit:contain}
+  /* official strip: never cropped; its white emblem tab hangs over the black meta bar.
+     --tab-overlap = how far the tab extends below the cyan band (tune to the asset). */
+  .muni-strip{--tab-overlap:16px;position:relative;z-index:10;width:100%;overflow:visible;line-height:0;margin-bottom:calc(-1 * var(--tab-overlap))}
+  .muni-strip img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+  .meta{position:relative;z-index:1}
+  /* if the emblem tab covers the right-hand meta label, raise this to push the label clear of it */
+  .meta > span:first-child{margin-right:var(--tab-clear,0px)}
   .logo-badge{font-family:'Inter',sans-serif;font-weight:800;font-size:20px;direction:ltr;white-space:nowrap}
   .logo-badge.he{font-family:var(--sans);font-weight:800;font-size:22px;direction:rtl}
 
