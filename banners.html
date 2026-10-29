@@ -125,7 +125,9 @@
   .card{background:#fff;border:2px solid #0A0A0A;box-shadow:4px 4px 0 #0A0A0A;position:relative;display:flex;flex-direction:column}
   .card .ph{width:100%;aspect-ratio:4/5;height:auto;flex:0 0 auto;border-bottom:2px solid #0A0A0A;overflow:hidden;background:#d9d6cf;position:relative}
   .card .ph img{width:100%;height:100%;display:block}
-  .card .ph img.raw{object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.08)}
+  .card .ph img{object-fit:cover;object-position:center;image-rendering:-webkit-optimize-contrast}
+  .card .ph img.raw{filter:grayscale(100%) contrast(105%) brightness(102%)}
+  #speaker-card-16 .ph img.raw, [data-slug="nadav-beyar-douani"] img.raw{filter:grayscale(100%) brightness(115%) contrast(100%)}
   .card .num{
     position:absolute;top:0;right:0;background:#C6FF00;border-left:2px solid #0A0A0A;border-bottom:2px solid #0A0A0A;
     font-family:'Space Mono','Assistant',sans-serif;font-weight:700;font-size:11px;padding:1px 5px;direction:ltr;
@@ -200,8 +202,10 @@
   .spot-topics li b{font-family:'Space Mono','Assistant',sans-serif;color:#FF6633;font-size:19px;flex:0 0 auto}
 
   .spot-photo{position:relative;width:520px;aspect-ratio:4/5;border:4px solid #0A0A0A;box-shadow:10px 10px 0 #FF6633;background:#d9d6cf;overflow:hidden}
-  .spot-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:top}
-  .spot-photo img.raw{filter:grayscale(1) contrast(1.08)}
+  .spot-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+  .spot-photo img{image-rendering:-webkit-optimize-contrast}
+  .spot-photo img.raw{filter:grayscale(100%) contrast(105%) brightness(102%)}
+  .spot-photo[data-slug="nadav-beyar-douani"] img.raw{filter:grayscale(100%) brightness(115%) contrast(100%)}
   .spot-photo .avatar{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
     background:#3a3a3a;color:#e6e6e6;font-family:'Space Mono','Assistant',sans-serif;font-weight:700;font-size:120px;direction:ltr}
   .spot-num{position:absolute;top:0;right:0;z-index:2;background:#C6FF00;color:#0A0A0A;
@@ -363,6 +367,8 @@ const NADAV_SRC = "";
 
 /* topics: what this speaker covers in the studio. Fill in the real session topics per speaker;
    when empty, the spotlight shows the studio-format lines in DEFAULT_TOPICS (no claims about the person). */
+const DEFAULT_TONE = {brightness:1.02, contrast:1.05};
+
 const DEFAULT_TOPICS = [
   "סשן מעשי מתוך הניסיון בשטח",
   "עבודה על המיזמים של המשתתפים",
@@ -387,7 +393,8 @@ const SPEAKERS = [
      topics:["מנטורינג אישי מתוך ניסיון מעשי", "אבטחת מידע וסייבר בסטארטאפים", "צמיחה ורכישה (M&A) בעולם הטק"]},
   {name:"Itamar Eliash",      slug:"itamar-eliash",     role:"Vice President, Symbol",                asset:"speakers/itamar-eliash.jpg",
      topics:["מחקר שוק וולידציה מעשית", "התאמת מוצר לשוק (Product-Market Fit)", "בניית ערך עסקי ליזמים"]},
-  {name:"Nadav Beyar-Douani",  slug:"nadav-beyar-douani", role:"מנהל הרציף // עיריית ת״א-יפו",          fromStudio:true,                            topics:[]},
+  {name:"Nadav Beyar-Douani",  slug:"nadav-beyar-douani", role:"מנהל הרציף // עיריית ת״א-יפו",          fromStudio:true,                            topics:[],
+     tone:{autoLevels:true, brightness:1.15, contrast:1.00}},   /* stretch a dark source, then lift: midtones, hair and features stay readable */
 ];
 
 /* Pull Nadav's exact <img src> out of studio.html */
@@ -415,7 +422,8 @@ const initialsOf = s => s.initials || s.name.split(/[\s-]+/).filter(Boolean).sli
 
 /* Crop to 4:5 (top-anchored) + grayscale on a canvas, so the PNG export matches the preview
    (html2canvas ignores CSS filter and object-fit). Falls back to CSS grayscale if the canvas is tainted. */
-function processImage(src){
+function processImage(src, tone){
+  const T = tone || DEFAULT_TONE;
   return new Promise(resolve=>{
     if (!src) return resolve({ok:false});
     const im = new Image();
@@ -428,13 +436,26 @@ function processImage(src){
         const ctx = c.getContext("2d");
         ctx.drawImage(im, sx, sy, sw, sh, 0, 0, W, H);
         const d = ctx.getImageData(0,0,W,H), p = d.data;
+        /* optional auto-levels: map the 1st–99th luminance percentile to the full 0–255 range */
+        let lo = 0, hi = 255;
+        if (T.autoLevels){
+          const hist = new Uint32Array(256), n = p.length/4;
+          for (let i=0;i<p.length;i+=4) hist[Math.round(0.299*p[i] + 0.587*p[i+1] + 0.114*p[i+2])]++;
+          let acc = 0; for (lo=0; lo<255; lo++){ acc += hist[lo]; if (acc > n*0.01) break; }
+          acc = 0; for (hi=255; hi>0; hi--){ acc += hist[hi]; if (acc > n*0.01) break; }
+          if (hi - lo < 12){ lo = 0; hi = 255; }        // almost flat image: leave it alone
+        }
+        const span = 255 / Math.max(1, hi - lo);
         for (let i=0;i<p.length;i+=4){
           let g = 0.299*p[i] + 0.587*p[i+1] + 0.114*p[i+2];
-          g = Math.max(0, Math.min(255, (g-128)*1.08 + 128));
+          g = (g - lo) * span;
+          g = g * T.brightness;
+          g = (g - 128) * T.contrast + 128;
+          g = Math.max(0, Math.min(255, g));
           p[i]=p[i+1]=p[i+2]=g;
         }
         ctx.putImageData(d,0,0);
-        resolve({ok:true, url:c.toDataURL("image/jpeg",0.92)});
+        resolve({ok:true, url:c.toDataURL("image/jpeg",0.97)});
       }catch(e){ resolve({ok:true, url:src, raw:true}); }
     };
     im.onerror = () => resolve({ok:false});
@@ -446,13 +467,15 @@ function processImage(src){
 const grid = document.getElementById("grid");
 const photos = SPEAKERS.map(async s=>{
   const src = s.fromStudio ? await nadavFromStudio() : await firstWorking(candidatesFor(s.asset));
-  const res = await processImage(src);
+  const res = await processImage(src, s.tone);
   if (!res.ok){ console.warn("[banners] photo not found:", s.asset || "studio.html (Nadav)"); return null; }
   return res;
 });
 const jobs = SPEAKERS.map(async (s,i)=>{
   const card = document.createElement("div");
   card.className = "card";
+  card.id = `speaker-card-${i+1}`;
+  card.dataset.slug = s.slug;
   card.innerHTML = `
     <div class="ph"><div class="avatar">${initialsOf(s)}</div><span class="num">${String(i+1).padStart(2,"0")}</span></div>
     <div class="txt"><div class="name" dir="auto"></div><div class="role" dir="auto"></div></div>`;
@@ -605,6 +628,7 @@ async function renderSpot(i){
     li.innerHTML = "<b>//</b><span></span>"; li.lastChild.textContent = t; ul.appendChild(li);
   });
   const box = document.getElementById("spotPhoto");
+  box.dataset.slug = s.slug;
   box.querySelectorAll("img").forEach(el=>el.remove());
   const av = document.getElementById("spotAvatar");
   av.textContent = initialsOf(s); av.style.display = "";
@@ -642,6 +666,9 @@ const status = document.getElementById("status");
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
 const nextFrame = () => new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
+/* 2 = 2160 × 2700 px PNG (crisp text, borders and logos). Set to 1 for an exact 1080 × 1350 file. */
+const EXPORT_SCALE = 2;
+
 async function exportPNG(filename){
   await Promise.all(jobs);
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
@@ -650,9 +677,11 @@ async function exportPNG(filename){
   const canvas = await html2canvas(banner, {
     width: 1080,
     height: 1350,
-    scale: 1,
+    windowWidth: 1080,
+    scale: EXPORT_SCALE,
     useCORS: true,
     allowTaint: true,
+    imageTimeout: 0,
     backgroundColor: "#F4F1EA",
     logging: false,
     onclone: (clonedDoc) => {
@@ -684,8 +713,8 @@ async function run(label, task){
 }
 
 $("dl").addEventListener("click", ()=>run("rendering…", async ()=>{
-  await exportPNG("tel-and-tech-yazamut-track01-1080x1350.png");
-  status.textContent = "saved ✓ 1080 × 1350 px";
+  await exportPNG(`tel-and-tech-yazamut-track01-${1080*EXPORT_SCALE}x${1350*EXPORT_SCALE}.png`);
+  status.textContent = `saved ✓ ${1080*EXPORT_SCALE} × ${1350*EXPORT_SCALE} px`;
 }));
 
 $("dlOne").addEventListener("click", ()=>run("rendering…", async ()=>{
