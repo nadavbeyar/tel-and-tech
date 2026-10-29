@@ -508,6 +508,11 @@ document.getElementById("dl").addEventListener("click", async e=>{
       onclone: (clonedDoc) => {
         const stage = clonedDoc.getElementById("stage");
         if (stage) stage.style.transform = "none";
+        // remove box-shadow (and filters) in the cloned document — html2canvas paints hard shadows over the element face
+        clonedDoc.querySelectorAll("#banner, #banner *").forEach(el => {
+          el.style.boxShadow = "none";
+          el.style.filter = "none";
+        });
       }
     });
     window.scrollTo(0,y);
