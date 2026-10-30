@@ -104,7 +104,7 @@
     min-width:0;display:flex;align-items:center;justify-content:center;
     background:#fff;border:4px solid #0A0A0A;box-shadow:8px 8px 0 #0A0A0A;padding:14px 20px;
   }
-  .mark-img{display:block;height:144px;width:auto;max-width:100%;object-fit:contain}
+  .mark-img{display:block;height:132px;width:auto;max-width:100%;object-fit:contain}
   .details{
     min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;
     text-align:right;direction:rtl;
@@ -114,14 +114,14 @@
   .details .it b{font-family:'Space Mono','Assistant',sans-serif;font-weight:700;color:#FF6633;font-size:22px}
 
   /* speakers */
-  .speakers{padding:16px 44px 0;flex:1}
+  .speakers{padding:12px 44px 0;flex:1}
   .sec-head{
     display:flex;justify-content:space-between;align-items:flex-end;
-    border-bottom:2px solid #0A0A0A;padding-bottom:8px;margin-bottom:12px;
+    border-bottom:2px solid #0A0A0A;padding-bottom:6px;margin-bottom:10px;
   }
   .sec-head h2{font-size:26px;font-weight:800}
   .sec-head .count{font-family:'Space Mono','Assistant',sans-serif;font-size:14px;background:#0A0A0A;color:#C6FF00;padding:4px 10px;direction:ltr}
-  .grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-auto-rows:auto;align-items:stretch;gap:12px 14px}
+  .grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-auto-rows:auto;align-items:stretch;gap:10px 14px}
   .card{background:#fff;border:2px solid #0A0A0A;box-shadow:4px 4px 0 #0A0A0A;position:relative;display:flex;flex-direction:column}
   .card .ph{width:100%;aspect-ratio:4/5;height:auto;flex:0 0 auto;border-bottom:2px solid #0A0A0A;overflow:hidden;background:#d9d6cf;position:relative}
   .card .ph img{width:100%;height:100%;display:block}
@@ -138,10 +138,10 @@
   }
   .card .txt{padding:6px 6px 7px}
   .card .name{font-weight:800;font-size:14px;line-height:1.1}
-  .card .role{font-family:'Space Mono','Assistant',sans-serif;font-size:10px;line-height:1.3;margin-top:4px;color:#333;overflow-wrap:anywhere;hyphens:auto}
+  .card .role{font-family:'Space Mono','Assistant',sans-serif;font-size:9.5px;line-height:1.25;margin-top:4px;color:#333;overflow-wrap:anywhere;hyphens:auto}
 
   /* footer */
-  .footer{border-top:2px solid #0A0A0A;margin-top:14px}
+  .footer{border-top:2px solid #0A0A0A;margin-top:10px}
   .dates{display:grid;grid-template-columns:0.9fr 1.35fr 1.15fr;background:#0A0A0A;color:#fff}
   .date-cell{padding:11px 24px;border-left:2px solid #333}
   .date-cell:last-child{border-left:none}
@@ -376,11 +376,11 @@ const DEFAULT_TOPICS = [
 ];
 
 const SPEAKERS = [
-  {name:"Gilad Hazan",        slug:"gilad-hazan",       role:"Founder & CEO, GHgroup",                 asset:"speakers/gilad-hazan.jpg.jpg",       topics:[]},
+  {name:"Gilad Hazan",        slug:"gilad-hazan",       role:"Serial Tech Entrepreneur (8200 Alum) | Founder & CEO, GHgroup",asset:"speakers/gilad-hazan.jpg.jpg",       topics:[]},
   {name:"Assaf Tzur-El",      slug:"assaf-tzur-el",     role:"Startup Tech Advisor & Fractional CTO", asset:"speakers/assaf-tzur-el.jpg.jpg",     topics:[]},
   {name:"Hadas Farhi",        slug:"hadas-farhi",       role:"Senior Frontend Developer & Design Systems Consultant", asset:"speakers/hadas-farhi.jpg.jpg", topics:[]},
   {name:"Aviad Ben-laish",    slug:"aviad-ben-laish",   role:"Principal, StageOne Ventures",          asset:"speakers/aviad-ben-laish.jpg.jpg",   topics:[]},
-  {name:"Lior Frimet",        slug:"lior-frimet",       role:"קשרי אקדמיה ותעשייה",                   asset:"speakers/lior-frimet.jpg.jpg",       topics:[]},
+  {name:"Lior Frimet",        slug:"lior-frimet",       role:"Head of Academic & Industry Alliances | Tel Aviv Tech, Tel Aviv-Yafo Municipality",asset:"speakers/lior-frimet.jpg.jpg",       topics:[]},
   {name:"Ron Peled",          slug:"ron-peled",         role:"Co-founder, Sola Security",             asset:"speakers/ron-peled.jpg.jpg",         topics:[]},
   {name:"Tomer Kashi",        slug:"tomer-kashi",       role:"Co-Founder & CEO, SkyWatch & VOOM Insurance", asset:"speakers/tomer-kashi.jpg.jpg", topics:[]},
   {name:"Omer Kalderon",      slug:"omer-kalderon",     role:"General Partner, Day Zero VC",          asset:"speakers/omer-kalderon.jpg.jpg",     topics:[]},
@@ -393,7 +393,7 @@ const SPEAKERS = [
      topics:["מנטורינג אישי מתוך ניסיון מעשי", "אבטחת מידע וסייבר בסטארטאפים", "צמיחה ורכישה (M&A) בעולם הטק"]},
   {name:"Itamar Eliash",      slug:"itamar-eliash",     role:"Vice President, Symbol",                asset:"speakers/itamar-eliash.jpg",
      topics:["מחקר שוק וולידציה מעשית", "התאמת מוצר לשוק (Product-Market Fit)", "בניית ערך עסקי ליזמים"]},
-  {name:"Nadav Beyar-Douani",  slug:"nadav-beyar-douani", role:"מנהל הרציף // עיריית ת״א-יפו",          fromStudio:true,                            topics:[],
+  {name:"Nadav Beyar-Douani",  slug:"nadav-beyar-douani", role:"Director, The Platform | Tel Aviv Tech, Tel Aviv-Yafo Municipality",fromStudio:true,                            topics:[],
      tone:{autoLevels:true, brightness:1.15, contrast:1.00}},   /* stretch a dark source, then lift: midtones, hair and features stay readable */
 ];
 
