@@ -121,7 +121,7 @@
   }
   .sec-head h2{font-size:26px;font-weight:800}
   .sec-head .count{font-family:'Space Mono','Assistant',sans-serif;font-size:14px;background:#0A0A0A;color:#C6FF00;padding:4px 10px;direction:ltr}
-  .grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-auto-rows:auto;align-items:stretch;gap:10px 14px}
+  .grid{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));grid-auto-rows:auto;align-items:stretch;gap:10px 11px}
   .card{background:#fff;border:2px solid #0A0A0A;box-shadow:4px 4px 0 #0A0A0A;position:relative;display:flex;flex-direction:column}
   .card .ph{width:100%;aspect-ratio:4/5;height:auto;flex:0 0 auto;border-bottom:2px solid #0A0A0A;overflow:hidden;background:#d9d6cf;position:relative}
   .card .ph img{width:100%;height:100%;display:block}
@@ -194,6 +194,7 @@
   .spot-name{font-weight:800;font-size:64px;line-height:.98;color:#0A0A0A;overflow-wrap:anywhere;text-align:right}
   .spot-role{font-family:'Space Mono','Assistant',sans-serif;font-size:21px;line-height:1.35;color:#222222;
     border-right:6px solid #FF6633;padding-right:16px;overflow-wrap:anywhere;text-align:right}
+  .spot-role.ltr{direction:ltr;text-align:left}
   .spot-topics{background:#C6FF00;color:#0A0A0A;border:3px solid #0A0A0A;box-shadow:8px 8px 0 #0A0A0A;padding:18px 24px 20px;margin-left:8px}
   .spot-topics h3{display:inline-block;background:#0A0A0A;background-color:#0A0A0A;color:#C6FF00;border:2px solid #0A0A0A;font-family:'Assistant','Inter',sans-serif;font-weight:800;font-size:24px;line-height:1.15;letter-spacing:.02em;padding:6px 14px;margin:0 0 16px}
   .spot-topics h3 .sl{font-family:'Space Mono','Assistant',sans-serif;font-weight:700;color:#FF6633;margin-left:8px}
@@ -232,14 +233,14 @@
 
 <div class="controls">
   <div class="seg" role="tablist">
-    <button id="modeMaster" class="on" role="tab">באנר כללי (16 דוברים)</button>
+    <button id="modeMaster" class="on" role="tab">באנר כללי (17 דוברים)</button>
     <button id="modeSpot" role="tab">באנר אישי (Spotlight)</button>
   </div>
   <span class="ctl-sep"></span>
   <button class="btn" id="dl">הורדת באנר כתמונה (PNG)</button>
   <select class="pick" id="pick" hidden></select>
   <button class="btn" id="dlOne" hidden>הורדת באנר זה (PNG)</button>
-  <button class="btn ghost" id="dlAll" hidden>הורדת כל 16 הבאנרים (רצף)</button>
+  <button class="btn ghost" id="dlAll" hidden>הורדת כל 17 הבאנרים (רצף)</button>
   <button class="btn ghost" id="zoom">תצוגה 100%</button>
   <span class="status" id="status">1080 × 1350 px</span>
 </div>
@@ -281,7 +282,7 @@
         <div class="speakers master-only">
           <div class="sec-head">
             <h2>המרצים והמנטורים</h2>
-            <span class="count" style="direction:rtl">[ 16 דוברים ומנטורים ]</span>
+            <span class="count" style="direction:rtl">[ 17 דוברים ומנטורים ]</span>
           </div>
           <div class="grid" id="grid"></div>
         </div>
@@ -298,11 +299,11 @@
         </div>
         <div class="spot-body spot-only">
           <div class="spot-info">
-            <div class="spot-kicker" id="spotKicker">SPEAKER_01 / 16</div>
+            <div class="spot-kicker" id="spotKicker">SPEAKER_01 / 17</div>
             <h1 class="spot-name" id="spotName" dir="auto"></h1>
             <div class="spot-role" id="spotRole" dir="auto"></div>
             <div class="spot-topics">
-              <h3><span class="sl">//</span>על מה נדבר בסטודיו</h3>
+              <h3><span class="sl">//</span><span id="spotTopicsTitle">על מה נדבר בסטודיו</span></h3>
               <ul id="spotTopics"></ul>
             </div>
           </div>
@@ -395,7 +396,15 @@ const SPEAKERS = [
      topics:["מחקר שוק וולידציה מעשית", "התאמת מוצר לשוק (Product-Market Fit)", "בניית ערך עסקי ליזמים"]},
   {name:"Nadav Beyar-Douani",  slug:"nadav-beyar-douani", role:"Director, The Platform | Tel Aviv Tech, Tel Aviv-Yafo Municipality",fromStudio:true,                            topics:[],
      tone:{autoLevels:true, brightness:1.15, contrast:1.00}},   /* stretch a dark source, then lift: midtones, hair and features stay readable */
+  {name:"Nadir Izrael",       slug:"nadir-izrael",      role:"GVP at ServiceNow | Co-Founder & CTO of Armis (Acquired)", asset:"speakers/nadir-izrael.jpg",
+     kicker:"MENTOR_17", topicsTitle:"על מה נדיר ידבר בסטודיו", roleAlign:"left",
+     topics:["בניית ארכיטקטורה, טכנולוגיה וסקייל של חברות צומחות", "הדרך מסטארטאפ צעיר ועד לאקזיט ענק (Armis)", "פידבק טכנולוגי ועסקי על המיזמים של הצוותים"]},
 ];
+
+/* Spotlight-only mentors: get their own banner (numbered after the grid) but stay out of the master grid. Currently none. */
+const EXTRA_SPOTLIGHTS = [
+];
+const SPOTLIGHTS = SPEAKERS.concat(EXTRA_SPOTLIGHTS);
 
 /* Pull Nadav's exact <img src> out of studio.html */
 async function nadavFromStudio(){
@@ -471,6 +480,11 @@ const photos = SPEAKERS.map(async s=>{
   if (!res.ok){ console.warn("[banners] photo not found:", s.asset || "studio.html (Nadav)"); return null; }
   return res;
 });
+const spotPhotos = SPOTLIGHTS.map((s,i)=> i < SPEAKERS.length ? photos[i] : (async ()=>{
+  const res = await processImage(await firstWorking(candidatesFor(s.asset)), s.tone);
+  if (!res.ok){ console.warn("[banners] photo not found:", s.asset); return null; }
+  return res;
+})());
 const jobs = SPEAKERS.map(async (s,i)=>{
   const card = document.createElement("div");
   card.className = "card";
@@ -617,22 +631,24 @@ let spotIndex = 0;
 
 async function renderSpot(i){
   spotIndex = i;
-  const s = SPEAKERS[i];
-  document.getElementById("spotKicker").textContent = `SPEAKER_${pad2(i+1)} / ${SPEAKERS.length}`;
+  const s = SPOTLIGHTS[i];
+  document.getElementById("spotKicker").textContent = s.kicker || `SPEAKER_${pad2(i+1)} / ${SPEAKERS.length}`;
+  document.getElementById("spotTopicsTitle").textContent = s.topicsTitle || "על מה נדבר בסטודיו";
+  document.getElementById("spotRole").classList.toggle("ltr", s.roleAlign === "left");
   document.getElementById("spotName").textContent = s.name;
   document.getElementById("spotRole").textContent = s.role;
   document.getElementById("spotNum").textContent = pad2(i+1);
   const ul = document.getElementById("spotTopics"); ul.innerHTML = "";
   (s.topics && s.topics.length ? s.topics : DEFAULT_TOPICS).forEach(t=>{
     const li = document.createElement("li");
-    li.innerHTML = "<b>//</b><span></span>"; li.lastChild.textContent = t; ul.appendChild(li);
+    li.innerHTML = "<b>//</b><span></span>"; li.lastChild.textContent = t.replace(/^\s*\/\/\s*/,""); ul.appendChild(li);
   });
   const box = document.getElementById("spotPhoto");
   box.dataset.slug = s.slug;
   box.querySelectorAll("img").forEach(el=>el.remove());
   const av = document.getElementById("spotAvatar");
   av.textContent = initialsOf(s); av.style.display = "";
-  const res = await photos[i];
+  const res = await spotPhotos[i];
   if (spotIndex !== i || !res) return;               // a newer selection won, or no photo
   const img = document.createElement("img");
   img.alt = s.name; img.src = res.url; if (res.raw) img.className = "raw";
@@ -644,7 +660,8 @@ async function renderSpot(i){
 /* ---------- MODES ---------- */
 const $ = id => document.getElementById(id);
 const pick = $("pick");
-SPEAKERS.forEach((s,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=`${pad2(i+1)} — ${s.name}`; pick.appendChild(o); });
+SPOTLIGHTS.forEach((s,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=`${pad2(i+1)} — ${s.name}`; pick.appendChild(o); });
+$("dlAll").textContent = `הורדת כל ${SPOTLIGHTS.length} הבאנרים (רצף)`;
 pick.addEventListener("change", ()=>renderSpot(+pick.value));
 
 function setMode(mode){
@@ -671,6 +688,7 @@ const EXPORT_SCALE = 2;
 
 async function exportPNG(filename){
   await Promise.all(jobs);
+  await Promise.all(spotPhotos);
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
   await nextFrame();
   const y = window.scrollY; window.scrollTo(0,0);
@@ -720,21 +738,21 @@ $("dl").addEventListener("click", ()=>run("rendering…", async ()=>{
 $("dlOne").addEventListener("click", ()=>run("rendering…", async ()=>{
   const i = +pick.value;
   await renderSpot(i);
-  await exportPNG(`tel-and-tech-spotlight-${pad2(i+1)}-${SPEAKERS[i].slug}.png`);
-  status.textContent = `saved ✓ ${pad2(i+1)} / ${SPEAKERS.length}`;
+  await exportPNG(`tel-and-tech-spotlight-${pad2(i+1)}-${SPOTLIGHTS[i].slug}.png`);
+  status.textContent = `saved ✓ ${pad2(i+1)} / ${SPOTLIGHTS.length}`;
 }));
 
-$("dlAll").addEventListener("click", ()=>run(`rendering 0 / ${SPEAKERS.length}…`, async ()=>{
+$("dlAll").addEventListener("click", ()=>run(`rendering 0 / ${SPOTLIGHTS.length}…`, async ()=>{
   const back = +pick.value;
-  for (let i=0;i<SPEAKERS.length;i++){
-    status.textContent = `rendering ${i+1} / ${SPEAKERS.length}…`;
+  for (let i=0;i<SPOTLIGHTS.length;i++){
+    status.textContent = `rendering ${i+1} / ${SPOTLIGHTS.length}…`;
     pick.value = i;
     await renderSpot(i);
-    await exportPNG(`tel-and-tech-spotlight-${pad2(i+1)}-${SPEAKERS[i].slug}.png`);
+    await exportPNG(`tel-and-tech-spotlight-${pad2(i+1)}-${SPOTLIGHTS[i].slug}.png`);
     await sleep(450);   // give the browser room between downloads
   }
   pick.value = back; await renderSpot(back);
-  status.textContent = `saved ✓ ${SPEAKERS.length} / ${SPEAKERS.length}`;
+  status.textContent = `saved ✓ ${SPOTLIGHTS.length} / ${SPOTLIGHTS.length}`;
 }));
 </script>
 </body>
